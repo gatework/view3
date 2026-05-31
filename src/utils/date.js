@@ -193,7 +193,7 @@
             }
         }]
     };
-    parseFlags.DD = parseFlags.DD;
+    parseFlags.DD = parseFlags.D;
     parseFlags.dddd = parseFlags.ddd;
     parseFlags.Do = parseFlags.dd = parseFlags.d;
     parseFlags.mm = parseFlags.m;
@@ -219,7 +219,7 @@
      * Format a date
      * @method format
      * @param {Date|number} dateObj
-     * @param {string} mask Format of the date, i.e. 'mm-dd-yy' or 'shortDate'
+     * @param {string} mask Format of the date, i.e. 'MM-dd-yy' or 'shortDate'
      */
     fecha.format = function (dateObj, mask, i18nSettings) {
         var i18n = i18nSettings || fecha.i18n;
