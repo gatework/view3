@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$cell-prefix-cls} {
   overflow: hidden;
   position: relative;

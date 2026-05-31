@@ -1,6 +1,6 @@
 <template>
   <Submenu :name="`${parentName}`">
-    <template slot="title">
+    <template #title>
       <span>{{ parentItem.name }}</span>
     </template>
     <template v-for="item in children">

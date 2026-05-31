@@ -356,7 +356,7 @@ export default {
         this.setValue(null)
         return
       }
-      if (event.type == 'input' && val.match(/^\-?\.?$|\.$/)) return // prevent fire early if decimal. If no more input the change event will fire later
+      if (event.type == 'input' && val.match(/^-?\.?$|\.$/)) return // prevent fire early if decimal. If no more input the change event will fire later
 
       val = Number(val)
 

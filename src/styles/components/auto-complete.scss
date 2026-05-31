@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$auto-complete-prefix-cls} {
   .#{$select-prefix-cls} {
     &-not-found {

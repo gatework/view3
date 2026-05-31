@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$message-prefix-cls} {
   font-size: $font-size-base;
   left: 0;

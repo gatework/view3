@@ -67,7 +67,7 @@
       v-if="resetSelect"
       type="ios-close-circle"
       :class="[prefixCls + '-arrow']"
-      @click.native.stop="onClear"
+      @click.stop="onClear"
     />
     <Icon
       v-if="!resetSelect && !remote"

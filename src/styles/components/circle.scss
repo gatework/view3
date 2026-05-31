@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$circle-prefix-cls} {
   display: inline-block;
   position: relative;

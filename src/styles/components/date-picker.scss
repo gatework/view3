@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$date-picker-prefix-cls} {
   //position: relative;
   display: inline-block;

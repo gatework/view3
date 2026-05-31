@@ -1,4 +1,4 @@
-const isServer = false
+const isServer = typeof window === 'undefined' || typeof document === 'undefined'
 
 /* istanbul ignore next */
 export const on = (function () {

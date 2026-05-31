@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { oneOf } from '../../utils/assist'
+import { oneOf } from '../utils/assist'
 
 const prefixCls = 'ivu-steps'
 
@@ -25,6 +25,11 @@ function debounce (fn) {
 
 export default {
   name: 'Steps',
+  provide () {
+    return {
+      StepsInstance: this
+    }
+  },
   props: {
     current: {
       type: Number,
@@ -48,6 +53,11 @@ export default {
       default: 'horizontal'
     }
   },
+  data () {
+    return {
+      steps: []
+    }
+  },
   computed: {
     classes () {
       return [
@@ -63,19 +73,33 @@ export default {
     current () {
       this.updateChildProps()
     },
+    direction () {
+      this.updateChildProps()
+    },
     status () {
       this.updateCurrent()
     }
   },
   mounted () {
     this.updateSteps()
-    this.mitt.on('append', this.debouncedAppendRemove())
-    this.mitt.on('remove', this.debouncedAppendRemove())
   },
   methods: {
+    registerStep (step) {
+      if (!this.steps.includes(step)) {
+        this.steps.push(step)
+        this.debouncedUpdateSteps()
+      }
+    },
+    unregisterStep (step) {
+      const index = this.steps.indexOf(step)
+      if (index > -1) {
+        this.steps.splice(index, 1)
+        this.debouncedUpdateSteps()
+      }
+    },
     updateChildProps (isInit) {
-      const total = this.$children.length
-      this.$children.forEach((child, index) => {
+      const total = this.steps.length
+      this.steps.forEach((child, index) => {
         child.stepNumber = index + 1
 
         if (this.direction === 'horizontal') {
@@ -97,36 +121,34 @@ export default {
         }
 
         if (child.currentStatus !== 'error' && index !== 0) {
-          this.$children[index - 1].nextError = false
+          this.steps[index - 1].nextError = false
         }
       })
     },
     setNextError () {
-      this.$children.forEach((child, index) => {
+      this.steps.forEach((child, index) => {
         if (child.currentStatus === 'error' && index !== 0) {
-          this.$children[index - 1].nextError = true
+          this.steps[index - 1].nextError = true
         }
       })
     },
     updateCurrent (isInit) {
       // 防止溢出边界
-      if (this.current < 0 || this.current >= this.$children.length) {
+      if (this.current < 0 || this.current >= this.steps.length) {
         return
       }
       if (isInit) {
-        const current_status = this.$children[this.current].currentStatus
-        if (!current_status) {
-          this.$children[this.current].currentStatus = this.status
+        const currentStatus = this.steps[this.current].currentStatus
+        if (!currentStatus) {
+          this.steps[this.current].currentStatus = this.status
         }
       } else {
-        this.$children[this.current].currentStatus = this.status
+        this.steps[this.current].currentStatus = this.status
       }
     },
-    debouncedAppendRemove () {
-      return debounce(function () {
-        this.updateSteps()
-      })
-    },
+    debouncedUpdateSteps: debounce(function () {
+      this.updateSteps()
+    }),
     updateSteps () {
       this.updateChildProps(true)
       this.setNextError()

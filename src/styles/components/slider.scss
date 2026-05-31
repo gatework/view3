@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$slider-prefix-cls} {
   line-height: normal;
 

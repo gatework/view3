@@ -25,8 +25,8 @@
         :placement="placement"
         :data-transfer="transfer"
         :transfer="transfer"
-        @mouseenter.native="handleMouseenter"
-        @mouseleave.native="handleMouseleave"
+        @mouseenter="handleMouseenter"
+        @mouseleave="handleMouseleave"
       >
         <slot name="list" />
       </Drop>

@@ -1,13 +1,3 @@
-<style>
-    .demo-carousel{
-        height: 200px;
-        line-height: 200px;
-        text-align: center;
-        color: #fff;
-        font-size: 20px;
-        background: #506b9e;
-    }
-</style>
 <template>
   <div style="width: 400px;">
     <Carousel
@@ -56,3 +46,13 @@ export default {
   }
 }
 </script>
+<style>
+    .demo-carousel{
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        background: #506b9e;
+    }
+</style>

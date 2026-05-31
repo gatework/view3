@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$anchor-prefix} {
   &-wrapper {
     margin-left: -4px;

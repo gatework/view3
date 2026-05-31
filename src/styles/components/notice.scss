@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$notice-prefix-cls} {
   margin-right: 24px;
   position: fixed;

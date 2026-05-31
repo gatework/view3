@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$tooltip-prefix-cls} {
   display: inline-block;
 
@@ -14,7 +16,7 @@
   &-light &-popper {
     @include popper($tooltip-arrow, $tooltip-arrow-width-light, $tooltip-distance-light, $tooltip-arrow-color);
 
-    &[x-placement^="top"] .#{$tooltip-arrow}:after {
+    &[data-popper-placement^="top"] .#{$tooltip-arrow}:after {
       border-bottom-width: 0;
       border-top-color: #fff;
       border-top-width: $tooltip-arrow-width-light;
@@ -23,7 +25,7 @@
       margin-left: -$tooltip-arrow-width-light;
     }
 
-    &[x-placement^="right"] .#{$tooltip-arrow}:after {
+    &[data-popper-placement^="right"] .#{$tooltip-arrow}:after {
       border-left-width: 0;
       border-right-color: #fff;
       border-right-width: $tooltip-arrow-width-light;
@@ -32,7 +34,7 @@
       left: 1px;
     }
 
-    &[x-placement^="bottom"] .#{$tooltip-arrow}:after {
+    &[data-popper-placement^="bottom"] .#{$tooltip-arrow}:after {
       border-bottom-color: #fff;
       border-bottom-width: $tooltip-arrow-width-light;
       border-top-width: 0;
@@ -41,7 +43,7 @@
       top: 1px;
     }
 
-    &[x-placement^="left"] .#{$tooltip-arrow}:after {
+    &[data-popper-placement^="left"] .#{$tooltip-arrow}:after {
       border-left-color: #fff;
       border-left-width: $tooltip-arrow-width-light;
       border-right-width: 0;

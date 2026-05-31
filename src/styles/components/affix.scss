@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .ivu-affix {
   position: fixed;
   z-index: $zindex-affix;

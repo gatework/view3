@@ -24,13 +24,13 @@
       >
         标签三的内容
       </TabPane>
-      <template slot="contextMenu">
-        <DropdownItem @click.native="handleContextMenuEdit">
+      <template #contextMenu>
+        <DropdownItem @click="handleContextMenuEdit">
           编辑
         </DropdownItem>
         <DropdownItem
           style="color: #ed4014"
-          @click.native="handleContextMenuDelete"
+          @click="handleContextMenuDelete"
         >
           删除
         </DropdownItem>

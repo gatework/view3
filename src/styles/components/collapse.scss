@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$collapse-prefix-cls} {
   background-color: $background-color-base;
   border: 1px solid $border-color-base;

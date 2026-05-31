@@ -1,3 +1,6 @@
+@use 'sass:string';
+
+@use '../core' as *;
 .#{$drawer-prefix-cls} {
   height: 100%;
   position: fixed;
@@ -114,7 +117,7 @@
 
     &-move-trigger {
       background: rgb(243, 243, 243);
-      border-radius: unquote('4px / 6px');
+      border-radius: string.unquote('4px / 6px');
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
       cursor: col-resize;
       height: 100px;

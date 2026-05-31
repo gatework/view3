@@ -2,17 +2,17 @@
   <div style="margin: 200px">
     <Divider>TreeTable</Divider>
     <VTable
+      ref="selection"
       border
       highlight-row
-      ref="selection"
       content-menu
       :columns="columns0"
-      @on-current-change="occ"
       :data="data0"
-      @on-row-click="orc"
       row-key="id"
-      @on-row-dblclick="ordc"
       :load-data="loadData"
+      @on-current-change="occ"
+      @on-row-click="orc"
+      @on-row-dblclick="ordc"
       @on-select="os"
       @on-select-cancel="osc"
       @on-select-all="osa"
@@ -20,8 +20,7 @@
       @on-contextmenu="ocm"
     >
       <template
-        slot="age"
-        slot-scope="{ row }"
+        #age="{ row }"
       >
         <strong>{{ row.age }}</strong>
       </template>

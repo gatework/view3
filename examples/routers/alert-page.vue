@@ -2,30 +2,32 @@
   <div>
     <Alert>
       An info prompt
-      <template slot="desc">
+      <template #desc>
         Content of prompt. Content of prompt. Content of prompt. Content of prompt.
       </template>
     </Alert>
     <Alert type="success">
       A success prompt
-      <template slot="desc">
+      <template #desc>
         Content of prompt. Content of prompt. Content of prompt. Content of prompt.
       </template>
     </Alert>
     <Alert type="warning">
       A warning prompt
-      <template slot="desc">
+      <template #desc>
         Content of prompt. Content of prompt. Content of prompt.
       </template>
     </Alert>
     <Alert type="error">
       An error prompt
-      <span slot="desc">
-        Custom error description copywriting. <Icon
-          type="help-circled"
-          size="14"
-        />
-      </span>
+      <template #desc>
+        <span>
+          Custom error description copywriting. <Icon
+            type="help-circled"
+            size="14"
+          />
+        </span>
+      </template>
     </Alert>
     <Alert
       type="info"
@@ -54,7 +56,7 @@
     </Alert>
     <Alert show-icon>
       消息提示文案
-      <template slot="desc">
+      <template #desc>
         消息提示的描述文案消息提示的描述文案消息提示的描述文案消息提示的描述文案消息提示的描述文案
       </template>
     </Alert>
@@ -63,14 +65,16 @@
       show-icon
     >
       成功提示文案
-      <span slot="desc">成功的提示描述文案成功的提示描述文案成功的提示描述文案成功的提示描述文案成功的提示描述文案</span>
+      <template #desc>
+        <span>成功的提示描述文案成功的提示描述文案成功的提示描述文案成功的提示描述文案成功的提示描述文案</span>
+      </template>
     </Alert>
     <Alert
       type="warning"
       show-icon
     >
       警告提示文案
-      <template slot="desc">
+      <template #desc>
         警告的提示描述文案警告的提示描述文案警告的提示描述文案
       </template>
     </Alert>
@@ -79,20 +83,24 @@
       show-icon
     >
       错误提示文案
-      <span slot="desc">
-        自定义错误描述文案。
-      </span>
+      <template #desc>
+        <span>
+          自定义错误描述文案。
+        </span>
+      </template>
     </Alert>
     <Alert
       show-icon
       closable
     >
       自定义图标
-      <Icon
-        slot="icon"
-        type="ios-bulb-outline"
-      />
-      <template slot="desc">
+      <template #icon>
+        <Icon
+
+          type="ios-bulb-outline"
+        />
+      </template>
+      <template #desc>
         自定义图标文案自定义图标文案自定义图标文案自定义图标文案自定义图标文案
       </template>
     </Alert>
@@ -118,14 +126,18 @@
       closable
     >
       A success prompt
-      <span slot="desc">Content of prompt. Content of prompt. Content of prompt. Content of prompt. </span>
+      <template #desc>
+        <span>Content of prompt. Content of prompt. Content of prompt. Content of prompt. </span>
+      </template>
     </Alert>
     <Alert
       type="warning"
       closable
     >
       Custom closing content
-      <span slot="close">No longer prompt</span>
+      <template #close>
+        <span>No longer prompt</span>
+      </template>
     </Alert>
   </div>
 </template>

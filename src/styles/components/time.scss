@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$time-prefix-cls} {
   &-with-hash {
     cursor: pointer;

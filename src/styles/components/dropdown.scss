@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$dropdown-prefix-cls} {
   display: inline-block;
   //position: relative;

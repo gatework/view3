@@ -1,6 +1,8 @@
 <script>
-const isServer = false
-const Popper = isServer ? function() {} : require('popper.js/dist/umd/popper.js');  // eslint-disable-line
+import { createPopper as createPopperCore } from '@popperjs/core'
+
+const isServer = typeof window === 'undefined'
+const validPlacement = /^(top|bottom|left|right)(-start|-end)?$/
 
 export default {
   props: {
@@ -29,16 +31,7 @@ export default {
     options: {
       type: Object,
       default () {
-        return {
-          modifiers: {
-            computeStyle: {
-              gpuAcceleration: false
-            },
-            preventOverflow: {
-              boundariesElement: 'window'
-            }
-          }
-        }
+        return {}
       }
     }
     // visible: {
@@ -83,34 +76,60 @@ export default {
   methods: {
     createPopper () {
       if (isServer) return
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
+      if (!validPlacement.test(this.placement)) {
         return
       }
 
-      const options = this.options
       const popper = this.popper || this.$refs.popper
       const reference = this.reference || this.$refs.reference
 
       if (!popper || !reference) return
 
-      if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
+      if (this.popperJS) {
         this.popperJS.destroy()
       }
 
-      options.eventsEnabled = this.eventsEnabled
+      const { modifiers, ...options } = this.options
+      const userModifiers = Array.isArray(modifiers) ? modifiers : []
 
-      options.placement = this.placement
+      this.popperJS = createPopperCore(reference, popper, {
+        ...options,
+        placement: this.placement,
+        modifiers: [
+          {
+            name: 'computeStyles',
+            options: {
+              gpuAcceleration: false
+            }
+          },
+          {
+            name: 'preventOverflow',
+            options: {
+              boundary: 'viewport',
+              padding: this.boundariesPadding
+            }
+          },
+          {
+            name: 'offset',
+            options: {
+              offset: [0, Number(this.offset) || 0]
+            }
+          },
+          {
+            name: 'eventListeners',
+            options: {
+              scroll: this.eventsEnabled,
+              resize: this.eventsEnabled
+            }
+          },
+          ...userModifiers
+        ]
+      })
 
-      if (!options.modifiers.offset) {
-        options.modifiers.offset = {}
-      }
-      options.modifiers.offset.offset = this.offset
-      options.onCreate = () => {
-        this.$nextTick(this.updatePopper)
+      this.$nextTick(() => {
+        this.updatePopper()
         this.$emit('created', this)
-      }
-
-      this.popperJS = new Popper(reference, popper, options)
+      })
     },
     updatePopper () {
       if (isServer) return
@@ -119,7 +138,7 @@ export default {
     doDestroy () {
       if (isServer) return
       if (this.visible) return
-      this.popperJS.destroy()
+      if (this.popperJS) this.popperJS.destroy()
       this.popperJS = null
     }
   }

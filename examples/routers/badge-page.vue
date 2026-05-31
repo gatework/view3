@@ -1,17 +1,3 @@
-<style scoped>
-    .demo-badge{
-        width: 42px;
-        height: 42px;
-        background: #eee;
-        border-radius: 6px;
-        display: inline-block;
-    }
-</style>
-<style>
-    .demo-badge-alone{
-        background: #5cb85c !important;
-    }
-</style>
 <template>
   <div>
     <Badge :count="count">
@@ -30,12 +16,14 @@
       />
     </Badge>
     <Badge>
-      <Icon
-        slot="count"
-        type="md-time"
-        size="16"
-        color="#ff6600"
-      />
+      <template #count>
+        <Icon
+
+          type="md-time"
+          size="16"
+          color="#ff6600"
+        />
+      </template>
       <a
         href="#"
         class="demo-badge"
@@ -59,9 +47,9 @@
         href="#"
         class="demo-badge"
       />
-        <template v-slot:text>
-      <span>hhh</span>
-        </template>
+      <template #text>
+        <span>hhh</span>
+      </template>
     </Badge>
     <br><br>
     <Badge text="hot">
@@ -85,8 +73,8 @@
         text="Success"
       />
       <Badge status="success">
-        <template v-slot:text>
-        <strong>Success</strong>
+        <template #text>
+          <strong>Success</strong>
         </template>
       </Badge>
       <br>
@@ -288,3 +276,17 @@ export default {
   }
 }
 </script>
+<style scoped>
+    .demo-badge{
+        width: 42px;
+        height: 42px;
+        background: #eee;
+        border-radius: 6px;
+        display: inline-block;
+    }
+</style>
+<style>
+    .demo-badge-alone{
+        background: #5cb85c !important;
+    }
+</style>

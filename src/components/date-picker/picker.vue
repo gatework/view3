@@ -25,10 +25,10 @@
           @on-input-change="handleInputChange"
           @on-focus="handleFocus"
           @on-blur="handleBlur"
-          @click.native="handleFocus"
-          @keydown.native="handleKeydown"
-          @mouseenter.native="handleInputMouseenter"
-          @mouseleave.native="handleInputMouseleave"
+          @click="handleFocus"
+          @keydown="handleKeydown"
+          @mouseenter="handleInputMouseenter"
+          @mouseleave="handleInputMouseleave"
         >
           <template #suffix>
             <Icon
@@ -45,12 +45,12 @@
       <Drop
         v-show="opened"
         ref="drop"
+        v-transfer-dom
         :class="dropdownCls"
         :placement="placement"
-        v-transfer-dom
         :data-transfer="transfer"
         :transfer="transfer"
-        @click.native="handleTransferClick"
+        @click="handleTransferClick"
       >
         <div>
           <component
@@ -235,7 +235,7 @@ export default {
       type: String
     }
   },
-  emits: ['update:modelValue', 'on-open-change', 'on-change', 'on-open-change', 'on-ok', 'on-clickoutside'],
+  emits: ['update:modelValue', 'on-open-change', 'on-change', 'on-ok', 'on-clickoutside'],
   data () {
     const isRange = this.type.includes('range')
     const emptyArray = isRange ? [null, null] : [null]

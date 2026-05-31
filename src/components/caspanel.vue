@@ -10,8 +10,8 @@
         :prefix-cls="prefixCls"
         :data="item"
         :tmp-item="tmpItem"
-        @click.native.stop="handleClickItem(item)"
-        @mouseenter.native.stop="handleHoverItem(item)"
+        @click.stop="handleClickItem(item)"
+        @mouseenter.stop="handleHoverItem(item)"
       />
     </ul><Caspanel
       v-if="sublist && sublist.length"

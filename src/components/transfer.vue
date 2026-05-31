@@ -1,5 +1,48 @@
+<template>
+  <div :class="classes">
+    <TransferList
+      ref="left"
+      :prefix-cls="prefixCls + '-list'"
+      :data="leftData"
+      :render-format="renderFormat"
+      :checked-keys="leftCheckedKeys"
+      :list-style="listStyle"
+      :title="localeTitles[0]"
+      :filterable="filterable"
+      :filter-placeholder="localeFilterPlaceholder"
+      :filter-method="filterMethod"
+      :not-found-text="localeNotFoundText"
+      @on-checked-keys-change="handleLeftCheckedKeysChange"
+    >
+      <slot />
+    </TransferList>
+    <Operation
+      :prefix-cls="prefixCls"
+      :operations="operations"
+      :left-active="leftValidKeysCount > 0"
+      :right-active="rightValidKeysCount > 0"
+      :reverse-operation="reverseOperation"
+    />
+    <TransferList
+      ref="right"
+      :prefix-cls="prefixCls + '-list'"
+      :data="rightData"
+      :render-format="renderFormat"
+      :checked-keys="rightCheckedKeys"
+      :list-style="listStyle"
+      :title="localeTitles[1]"
+      :filterable="filterable"
+      :filter-placeholder="localeFilterPlaceholder"
+      :filter-method="filterMethod"
+      :not-found-text="localeNotFoundText"
+      @on-checked-keys-change="handleRightCheckedKeysChange"
+    >
+      <slot />
+    </TransferList>
+  </div>
+</template>
 <script>
-import List from './list'
+import TransferList from './transfer-list.vue'
 import Operation from './operation'
 import Locale from '../mixins/locale'
 import Emitter from '../mixins/emitter'
@@ -8,7 +51,13 @@ const prefixCls = 'ivu-transfer'
 
 export default {
   name: 'Transfer',
+  components: { TransferList, Operation },
   mixins: [Emitter, Locale],
+  provide () {
+    return {
+      TransferInstance: this
+    }
+  },
   props: {
     data: {
       type: Array,
@@ -73,6 +122,7 @@ export default {
       default: false
     }
   },
+  emits: ['on-change', 'on-selected-change'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -179,80 +229,17 @@ export default {
     },
     handleLeftCheckedKeysChange (keys) {
       this.leftCheckedKeys = keys
+      this.handleCheckedKeys()
     },
     handleRightCheckedKeysChange (keys) {
       this.rightCheckedKeys = keys
+      this.handleCheckedKeys()
     },
     handleCheckedKeys () {
       const sourceSelectedKeys = this.getValidKeys('left')
       const targetSelectedKeys = this.getValidKeys('right')
       this.$emit('on-selected-change', sourceSelectedKeys, targetSelectedKeys)
     }
-  },
-  render (h) {
-    function cloneVNode (vnode) {
-      const clonedChildren = vnode.children && vnode.children.map(vnode => cloneVNode(vnode))
-      const cloned = h(vnode.tag, vnode.data, clonedChildren)
-      cloned.text = vnode.text
-      cloned.isComment = vnode.isComment
-      cloned.componentOptions = vnode.componentOptions
-      cloned.elm = vnode.elm
-      cloned.context = vnode.context
-      cloned.ns = vnode.ns
-      cloned.isStatic = vnode.isStatic
-      cloned.key = vnode.key
-
-      return cloned
-    }
-
-    const vNodes = this.$slots.default === undefined ? [] : this.$slots.default
-    const clonedVNodes = this.$slots.default === undefined ? [] : vNodes.map(vnode => cloneVNode(vnode))
-
-    return h('div', {
-      class: this.classes
-    }, [
-      h(List, {
-        ref: 'left',
-        prefixCls: this.prefixCls + '-list',
-        data: this.leftData,
-        renderFormat: this.renderFormat,
-        checkedKeys: this.leftCheckedKeys,
-        validKeysCount: this.leftValidKeysCount,
-        listStyle: this.listStyle,
-        title: this.localeTitles[0],
-        filterable: this.filterable,
-        filterPlaceholder: this.localeFilterPlaceholder,
-        filterMethod: this.filterMethod,
-        notFoundText: this.localeNotFoundText,
-        onOnCheckedKeysChange: this.handleLeftCheckedKeysChange
-      }, vNodes),
-
-      h(Operation, {
-        props: {
-          prefixCls: this.prefixCls,
-          operations: this.operations,
-          leftActive: this.leftValidKeysCount > 0,
-          rightActive: this.rightValidKeysCount > 0,
-          reverseOperation: this.reverseOperation
-        }
-      }),
-
-      h(List, {
-        ref: 'right',
-        prefixCls: this.prefixCls + '-list',
-        data: this.rightData,
-        renderFormat: this.renderFormat,
-        checkedKeys: this.rightCheckedKeys,
-        validKeysCount: this.rightValidKeysCount,
-        listStyle: this.listStyle,
-        title: this.localeTitles[1],
-        filterable: this.filterable,
-        filterPlaceholder: this.localeFilterPlaceholder,
-        filterMethod: this.filterMethod,
-        notFoundText: this.localeNotFoundText,
-        onOnCheckedKeysChange: this.handleRightCheckedKeysChange
-      }, clonedVNodes)
-    ])
   }
 }
 </script>

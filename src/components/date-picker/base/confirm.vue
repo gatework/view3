@@ -15,8 +15,8 @@
     </i-button>
     <i-button
       size="small"
-      @click.native="handleClear"
-      @keydown.enter.native="handleClear"
+      @click="handleClear"
+      @keydown.enter="handleClear"
     >
       {{ labels.clear }}
     </i-button>
@@ -24,8 +24,8 @@
     <i-button
       size="small"
       type="primary"
-      @click.native="handleSuccess"
-      @keydown.enter.native="handleSuccess"
+      @click="handleSuccess"
+      @keydown.enter="handleSuccess"
     >
       {{ labels.ok }}
     </i-button>
@@ -42,11 +42,11 @@ export default {
   components: { iButton },
   mixins: [Locale, Emitter],
   props: {
-    showTime: false,
-    isTime: false,
-    timeDisabled: false
+    showTime: Boolean,
+    isTime: Boolean,
+    timeDisabled: Boolean
   },
-  emits: ['on-pick-click', 'on-pick-success', 'on-pick-clear', 'on-pick'],
+  emits: ['on-pick-click', 'on-pick-success', 'on-pick-clear', 'on-pick-toggle-time'],
   data () {
     return {
       prefixCls: prefixCls

@@ -1,23 +1,19 @@
+@use '../core' as *;
+
 .#{$steps-prefix-cls} {
-  display: box;
-  display: flexbox;
   display: flex;
   font-size: 0;
   line-height: 1.5;
   width: 100%;
 
   &-item {
-    -webkit-box-flex: 1;
     display: inline-block;
-    -ms-flex: 1;
     flex: 1;
     overflow: hidden;
     position: relative;
     vertical-align: top;
 
     &:last-child {
-      -webkit-box-flex: 0;
-      -ms-flex: 0;
       flex: none;
     }
 

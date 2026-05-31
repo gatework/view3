@@ -102,7 +102,7 @@
       <Checkbox
         :indeterminate="indeterminate"
         :model-value="false"
-        @click.prevent.native="handleCheckAll"
+        @click.prevent="handleCheckAll"
       >
         全选
       </Checkbox>

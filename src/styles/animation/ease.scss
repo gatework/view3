@@ -1,3 +1,6 @@
+@use '../core' as *;
+@use 'motion' as *;
+
 @mixin ease-motion($className, $keyframeName) {
   @include make-motion($className, $keyframeName);
   .#{$className}-enter-active, .#{$className}-appear {

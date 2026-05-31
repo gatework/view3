@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Spin from '../spin/spin.vue'
-import Icon from '../icon/icon.vue'
+import Spin from './spin.vue'
+import Icon from './icon.vue'
 
 const prefixCls = 'ivu-scroll'
 

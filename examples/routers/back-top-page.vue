@@ -1,8 +1,3 @@
-<style>
-    body{
-        /*height: 2000px;*/
-    }
-</style>
 <template>
   <BackTop />
 </template>
@@ -18,3 +13,8 @@ export default {
   }
 }
 </script>
+<style>
+    body{
+        /*height: 2000px;*/
+    }
+</style>

@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$timeline-prefix-cls} {
   list-style: none;
   margin: 0;

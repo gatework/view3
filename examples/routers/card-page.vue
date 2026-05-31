@@ -3,18 +3,22 @@
     style="width:350px"
     to="/button"
   >
-    <p slot="title">
-      <Icon type="ios-film-outline" />
-      <span>经典电影</span>
-    </p>
-    <a
-      slot="extra"
-      href="#"
-      @click.prevent="changeLimit"
-    >
-      <Icon type="ios-loop-strong" />
-      换一换
-    </a>
+    <template #title>
+      <p>
+        <Icon type="ios-film-outline" />
+        <span>经典电影</span>
+      </p>
+    </template>
+    <template #extra>
+      <a
+
+        href="#"
+        @click.prevent="changeLimit"
+      >
+        <Icon type="ios-loop-strong" />
+        换一换
+      </a>
+    </template>
     <ul>
       <li v-for="item in movieList">
         <a

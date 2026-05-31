@@ -63,14 +63,14 @@
               <slot name="footer">
                 <VButton
                   type="text"
-                  @click.native="cancel"
+                  @click="cancel"
                 >
                   {{ localeCancelText }}
                 </VButton>
                 <VButton
                   type="primary"
                   :loading="buttonLoading"
-                  @click.native="ok"
+                  @click="ok"
                 >
                   {{ localeOkText }}
                 </VButton>
@@ -91,7 +91,6 @@ import Emitter from '../mixins/emitter'
 import ScrollbarMixins from '../mixins/scrollbar'
 
 import { on, off } from '../utils/dom'
-import { findComponentsDownward } from '../utils/assist'
 
 import { transferIndex as modalIndex, transferIncrease as modalIncrease, lastVisibleIndex, lastVisibleIncrease } from '../utils/transfer-queue'
 
@@ -181,7 +180,7 @@ export default {
       default: 1000
     }
   },
-  emits: ['visible-change', 'update:modelValue', 'on-cancel', 'on-hidden'],
+  emits: ['visible-change', 'update:modelValue', 'on-cancel', 'on-ok', 'on-hidden'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -462,7 +461,7 @@ export default {
       }
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     document.removeEventListener('keydown', this.EscClose)
     this.removeScrollEffect()
   }

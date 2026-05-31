@@ -3,7 +3,6 @@ import { h } from 'vue'
 
 export default {
   name: 'TableExpand',
-  functional: true,
   props: {
     row: Object,
     render: Function,
@@ -13,15 +12,19 @@ export default {
       default: null
     }
   },
-  render ({ $props }) {
-    const params = {
-      row: $props.row,
-      index: $props.index
+  setup (props) {
+    return () => {
+      if (!props.render) return null
+
+      const params = {
+        row: props.row,
+        index: props.index
+      }
+
+      if (props.column) params.column = props.column
+
+      return props.render(h, params)
     }
-
-    if ($props.column) params.column = $props.column
-
-    return $props.render(h, params)
   }
 }
 </script>

@@ -1,19 +1,3 @@
-<style scoped>
-    .top,.bottom{
-        text-align: center;
-    }
-    .center{
-        width: 300px;
-        margin: 10px auto;
-        overflow: hidden;
-    }
-    .center-left{
-        float: left;
-    }
-    .center-right{
-        float: right;
-    }
-</style>
 <template>
   <div>
     <div class="top">
@@ -105,3 +89,19 @@ export default {
 
 }
 </script>
+<style scoped>
+    .top,.bottom{
+        text-align: center;
+    }
+    .center{
+        width: 300px;
+        margin: 10px auto;
+        overflow: hidden;
+    }
+    .center-left{
+        float: left;
+    }
+    .center-right{
+        float: right;
+    }
+</style>

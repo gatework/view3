@@ -4,8 +4,6 @@
   </div>
 </template>
 <script>
-import { findComponentDownward } from '../utils/assist'
-
 const prefixCls = 'ivu-layout'
 
 export default {

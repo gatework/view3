@@ -17,10 +17,13 @@
   </li>
 </template>
 <script>
+import Emitter from '../mixins/emitter'
+
 const prefixCls = 'ivu-select-group'
 
 export default {
   name: 'OptionGroup',
+  mixins: [Emitter],
   props: {
     label: {
       type: String,
@@ -34,13 +37,10 @@ export default {
     }
   },
   mounted () {
-    this.$on('on-query-change', () => {
-      this.queryChange()
-      return true
-    })
+    this.mitt.on('on-query-change', this.queryChange)
   },
   beforeUnmount () {
-    this.$off('on-query-change')
+    this.mitt.off('on-query-change', this.queryChange)
   },
   methods: {
     queryChange () {

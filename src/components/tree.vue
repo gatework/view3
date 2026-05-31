@@ -28,19 +28,21 @@
         transfer
         @on-clickoutside="handleClickContextMenuOutside"
       >
-        <DropdownMenu slot="list">
-          <slot name="contextMenu" />
-        </DropdownMenu>
+        <template #list>
+          <DropdownMenu>
+            <slot name="contextMenu" />
+          </DropdownMenu>
+        </template>
       </Dropdown>
     </div>
   </div>
 </template>
 <script>
 import TreeNode from './node.vue'
-import Dropdown from '../dropdown/dropdown.vue'
-import DropdownMenu from '../dropdown/dropdown-menu.vue'
-import Emitter from '../../mixins/emitter'
-import Locale from '../../mixins/locale'
+import Dropdown from './dropdown.vue'
+import DropdownMenu from './dropdown-menu.vue'
+import Emitter from '../mixins/emitter'
+import Locale from '../mixins/locale'
 
 const prefixCls = 'ivu-tree'
 
@@ -103,6 +105,7 @@ export default {
       stateTree: this.data,
       flatState: [],
       contextMenuVisible: false,
+      handleToggleExpand: (node) => this.$emit('on-toggle-expand', node),
       contextMenuStyles: {
         top: 0,
         left: 0
@@ -133,10 +136,16 @@ export default {
     this.rebuildTree()
   },
   mounted () {
-    this.$on('on-check', this.handleCheck)
-    this.$on('on-selected', this.handleSelect)
-    this.$on('toggle-expand', node => this.$emit('on-toggle-expand', node))
-    this.$on('contextmenu', this.handleContextmenu)
+    this.mitt.on('on-check', this.handleCheck)
+    this.mitt.on('on-selected', this.handleSelect)
+    this.mitt.on('toggle-expand', this.handleToggleExpand)
+    this.mitt.on('contextmenu', this.handleContextmenu)
+  },
+  beforeUnmount () {
+    this.mitt.off('on-check', this.handleCheck)
+    this.mitt.off('on-selected', this.handleSelect)
+    this.mitt.off('toggle-expand', this.handleToggleExpand)
+    this.mitt.off('contextmenu', this.handleContextmenu)
   },
   methods: {
     compileFlatState () { // so we have always a relation parent/children of each node
@@ -173,8 +182,8 @@ export default {
         parent.checked = parent[this.childrenKey].every(node => node.checked)
         parent.indeterminate = !parent.checked
       } else {
-        parent = checked = false
-        parent = indeterminate = parent[this.childrenKey].some(node => node.checked || node.indeterminate)
+        parent.checked = false
+        parent.indeterminate = parent[this.childrenKey].some(node => node.checked || node.indeterminate)
       }
       this.updateTreeUp(parentKey)
     },

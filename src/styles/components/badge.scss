@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../core' as *;
+
 .#{$badge-prefix-cls} {
   display: inline-block;
   position: relative;
@@ -87,7 +90,7 @@
   &-status {
     @each $name, $colors in $colors-pallete {
       &-#{$name} {
-        background-color: map-get($colors, '6');
+        background-color: map.get($colors, '6');
       }
     }
 

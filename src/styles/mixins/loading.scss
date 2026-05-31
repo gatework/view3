@@ -1,3 +1,5 @@
+@use '../custom' as *;
+
 // Loading for loop
 .ivu-load-loop {
   animation: ani-load-loop 1s linear infinite;

@@ -11,7 +11,7 @@
       <Checkbox
         :model-value="checked"
         :disabled="disabled"
-        @click.native.stop="handleClick"
+        @click.stop="handleClick"
         @on-change="toggleSelect"
       />
     </template>

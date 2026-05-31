@@ -1,6 +1,6 @@
-@mixin clearfix() {
-  zoom: 1;
+@use '../custom' as *;
 
+@mixin clearfix() {
   &::before,
   &::after {
     content: '';

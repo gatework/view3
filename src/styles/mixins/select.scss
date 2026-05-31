@@ -1,3 +1,5 @@
+@use '../custom' as *;
+
 @mixin select-item($size-class, $item-class) {
   .#{$item-class} {
     clear: both;

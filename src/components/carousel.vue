@@ -50,9 +50,9 @@
   </div>
 </template>
 <script>
-import Icon from '../icon/icon.vue'
-import { getStyle, oneOf } from '../../utils/assist'
-import { on, off } from '../../utils/dom'
+import Icon from './icon.vue'
+import { getStyle, oneOf } from '../utils/assist'
+import { on, off } from '../utils/dom'
 
 const prefixCls = 'ivu-carousel'
 
@@ -101,7 +101,7 @@ export default {
         return oneOf(value, ['click', 'hover'])
       }
     },
-    value: {
+    modelValue: {
       type: Number,
       default: 0
     },
@@ -125,9 +125,9 @@ export default {
       slideInstances: [],
       timer: null,
       ready: false,
-      currentIndex: this.value,
-      trackIndex: this.value,
-      copyTrackIndex: this.value,
+      currentIndex: this.modelValue,
+      trackIndex: this.modelValue,
+      copyTrackIndex: this.modelValue,
       hideTrackPos: -1 // 默认左滑
     }
   },
@@ -169,6 +169,12 @@ export default {
       ]
     }
   },
+  emits: ['update:modelValue', 'on-change', 'on-click'],
+  provide () {
+    return {
+      CarouselInstance: this
+    }
+  },
   watch: {
     autoplay () {
       this.setAutoplay()
@@ -185,7 +191,7 @@ export default {
     height () {
       this.updatePos()
     },
-    value (val) {
+    modelValue (val) {
       //                this.currentIndex = val;
       //                this.trackIndex = val;
       this.updateTrackIndex(val)
@@ -202,26 +208,19 @@ export default {
   methods: {
     // find option component
     findChild (cb) {
-      const find = function (child) {
-        const name = child.$options.componentName
-
-        if (name) {
-          cb(child)
-        } else if (child.$children.length) {
-          child.$children.forEach((innerChild) => {
-            find(innerChild, cb)
-          })
-        }
+      this.slideInstances.forEach(child => cb(child))
+    },
+    registerSlide (child) {
+      if (!this.slideInstances.includes(child)) {
+        this.slideInstances.push(child)
+        this.slotChange()
       }
-
-      if (this.slideInstances.length || !this.$children) {
-        this.slideInstances.forEach((child) => {
-          find(child)
-        })
-      } else {
-        this.$children.forEach((child) => {
-          find(child)
-        })
+    },
+    unregisterSlide (child) {
+      const index = this.slideInstances.indexOf(child)
+      if (index > -1) {
+        this.slideInstances.splice(index, 1)
+        this.slotChange()
       }
     },
     // copy trackDom
@@ -230,7 +229,7 @@ export default {
         this.$refs.copyTrack.innerHTML = this.$refs.originTrack.innerHTML
       })
     },
-    updateSlides (init) {
+    updateSlides () {
       const slides = []
       let index = 1
 
@@ -239,10 +238,6 @@ export default {
           $el: child.$el
         })
         child.index = index++
-
-        if (init) {
-          this.slideInstances.push(child)
-        }
       })
 
       this.slides = slides
@@ -260,9 +255,8 @@ export default {
     slotChange () {
       this.$nextTick(() => {
         this.slides = []
-        this.slideInstances = []
 
-        this.updateSlides(true, true)
+        this.updateSlides()
         this.updatePos()
         this.updateOffset()
       })
@@ -316,7 +310,7 @@ export default {
       }
       this.currentIndex = index === this.slides.length ? 0 : index
       this.$emit('on-change', oldIndex, this.currentIndex)
-      this.$emit('input', this.currentIndex)
+      this.$emit('update:modelValue', this.currentIndex)
     },
     arrowEvent (offset) {
       this.setAutoplay()
@@ -328,7 +322,7 @@ export default {
       if (event === this.trigger && curIndex !== n) {
         this.updateTrackIndex(n)
         this.$emit('on-change', oldCurrentIndex, this.currentIndex)
-        this.$emit('input', n)
+        this.$emit('update:modelValue', n)
         // Reset autoplay timer when trigger be activated
         this.setAutoplay()
       }
@@ -353,9 +347,10 @@ export default {
       this.$emit('on-click', this[type])
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     //            window.removeEventListener('resize', this.handleResize, false);
     off(window, 'resize', this.handleResize)
+    window.clearInterval(this.timer)
   }
 }
 </script>

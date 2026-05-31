@@ -48,7 +48,7 @@
             :key="key"
             :mark="item.mark"
             :style="{ 'left': item.position + '%' }"
-            @click.native="sliderClick"
+            @click="sliderClick"
           />
         </div>
       </template>
@@ -190,6 +190,7 @@ export default {
       type: Object
     }
   },
+  emits: ['update:modelValue', 'on-input', 'on-change'],
   data () {
     const val = this.checkLimits(Array.isArray(this.modelValue) ? this.modelValue : [this.modelValue])
     return {
@@ -310,7 +311,7 @@ export default {
         }
       })
       const value = this.range ? values : values[0]
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
       this.$emit('on-input', value)
     }
   },

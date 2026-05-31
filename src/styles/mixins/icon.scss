@@ -1,0 +1,15 @@
+@use '../custom' as *;
+
+@mixin ion() {
+  display: inline-block;
+  font-family: 'Ionicons';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-rendering: auto;
+  text-transform: none;
+}

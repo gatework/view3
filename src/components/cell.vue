@@ -14,19 +14,27 @@
         :label="label"
         :extra="extra"
       >
-        <slot
-          slot="icon"
-          name="icon"
-        />
-        <slot slot="default" />
-        <slot
-          slot="extra"
-          name="extra"
-        />
-        <slot
-          slot="label"
-          name="label"
-        />
+        <template #icon>
+          <slot
+
+            name="icon"
+          />
+        </template>
+        <template #default>
+          <slot />
+        </template>
+        <template #extra>
+          <slot
+
+            name="extra"
+          />
+        </template>
+        <template #label>
+          <slot
+
+            name="label"
+          />
+        </template>
       </CellItem>
     </a>
     <div
@@ -39,19 +47,27 @@
         :label="label"
         :extra="extra"
       >
-        <slot
-          slot="icon"
-          name="icon"
-        />
-        <slot slot="default" />
-        <slot
-          slot="extra"
-          name="extra"
-        />
-        <slot
-          slot="label"
-          name="label"
-        />
+        <template #icon>
+          <slot
+
+            name="icon"
+          />
+        </template>
+        <template #default>
+          <slot />
+        </template>
+        <template #extra>
+          <slot
+
+            name="extra"
+          />
+        </template>
+        <template #label>
+          <slot
+
+            name="label"
+          />
+        </template>
       </CellItem>
     </div>
     <div
@@ -79,7 +95,11 @@ export default {
   name: 'Cell',
   components: { CellItem, Icon },
   mixins: [mixinsLink],
-  inject: ['cellGroup'],
+  inject: {
+    CellGroupInstance: {
+      default: null
+    }
+  },
   props: {
     name: {
       type: [String, Number]
@@ -136,7 +156,7 @@ export default {
   },
   methods: {
     handleClickItem (event, new_window) {
-      this.$parent.handleClick(this.name)
+      this.CellGroupInstance?.handleClick(this.name)
 
       this.handleCheckClick(event, new_window)
     }

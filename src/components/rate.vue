@@ -56,20 +56,17 @@ import Locale from '../mixins/locale'
 import Emitter from '../mixins/emitter'
 import mixinsForm from '../mixins/form'
 
-import Icon from './icon'
-
 const prefixCls = 'ivu-rate'
 
 export default {
   name: 'Rate',
-  components: { Icon },
   mixins: [Locale, Emitter, mixinsForm],
   props: {
     count: {
       type: Number,
       default: 5
     },
-    value: {
+    modelValue: {
       type: Number,
       default: 0
     },
@@ -110,10 +107,11 @@ export default {
       prefixCls: prefixCls,
       hoverIndex: -1,
       isHover: false,
-      isHalf: this.allowHalf && this.value.toString().indexOf('.') >= 0,
-      currentValue: this.value
+      isHalf: this.allowHalf && this.modelValue.toString().indexOf('.') >= 0,
+      currentValue: this.modelValue
     }
   },
+  emits: ['update:modelValue', 'on-change'],
   computed: {
     classes () {
       return [
@@ -137,7 +135,7 @@ export default {
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.currentValue = val
     },
     currentValue (val) {
@@ -202,7 +200,7 @@ export default {
       }
 
       this.currentValue = value
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
       this.$emit('on-change', value)
       this.dispatch('FormItem', 'on-form-change', value)
     }

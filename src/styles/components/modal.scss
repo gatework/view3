@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$modal-prefix-cls} {
   margin: 0 auto;
   outline: none;

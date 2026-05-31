@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$select-dropdown-prefix-cls} {
   background-color: #fff;
   //border: 1px solid $border-color-split;

@@ -1,3 +1,6 @@
+@use 'sass:math';
+
+@use '../custom' as *;
 @mixin size($width, $height) {
   height: $height;
   width: $width;
@@ -7,12 +10,11 @@
   @include size($size, $size);
 }
 
-// fix chrome 12px bug, support ie
+// Fix Chrome's minimum font-size scaling.
 @mixin iconfont-size-under-12px($size, $rotate: 0deg) {
-  $font-scale: unit($size / $font-size-base);
+  $font-scale: math.div($size, $font-size-base);
   display: inline-block;
   font-size: $font-size-base;
-  font-size: '#{$size} \9'; // ie8-9
   transform: scale($font-scale) rotate($rotate);
 
   :root & {

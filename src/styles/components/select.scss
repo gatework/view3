@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$select-prefix-cls} {
   box-sizing: border-box;
   color: $text-color;

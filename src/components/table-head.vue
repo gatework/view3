@@ -7,7 +7,7 @@
   >
     <colgroup>
       <col
-        v-for="(column, index) in columns"
+        v-for="column in columns"
         :width="setCellWidth(column)"
       >
       <col
@@ -112,14 +112,14 @@
                         type="text"
                         size="small"
                         :disabled="!getColumn(rowIndex, index)._filterChecked.length"
-                        @click.native="handleFilter(getColumn(rowIndex, index)._index)"
+                        @click="handleFilter(getColumn(rowIndex, index)._index)"
                       >
                         {{ t('i.table.confirmFilter') }}
                       </VButton>
                       <VButton
                         type="text"
                         size="small"
-                        @click.native="handleReset(getColumn(rowIndex, index)._index)"
+                        @click="handleReset(getColumn(rowIndex, index)._index)"
                       >
                         {{ t('i.table.resetFilter') }}
                       </VButton>

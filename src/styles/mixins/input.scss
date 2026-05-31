@@ -1,3 +1,6 @@
+@use '../custom' as *;
+@use 'common' as *;
+
 @mixin hover($color: $input-hover-border-color) {
   border-color: tint($color, 20%);
 }
@@ -7,12 +10,12 @@
 
 @mixin active($color: $input-hover-border-color) {
   border-color: tint($color, 20%);
-  box-shadow: 0 0 0 2px rgba($color, 20%/100%);
+  box-shadow: 0 0 0 2px rgba($color, 0.2);
   outline: 0;
 }
 @mixin active-error() {
   border-color: $error-color;
-  box-shadow: 0 0 0 2px rgba($error-color, 20%/100%);
+  box-shadow: 0 0 0 2px rgba($error-color, 0.2);
   outline: 0;
 }
 

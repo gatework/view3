@@ -68,6 +68,7 @@ export default {
       default: false
     }
   },
+  emits: ['update:modelValue', 'on-collapse'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -129,7 +130,7 @@ export default {
   },
   mounted () {
     if (this.defaultCollapsed) {
-      this.$emit('input', this.defaultCollapsed)
+      this.$emit('update:modelValue', this.defaultCollapsed)
     }
     if (this.breakpoint !== undefined) {
       on(window, 'resize', this.onWindowResize)
@@ -155,7 +156,7 @@ export default {
       this.mediaMatched = matchMedia(`(max-width: ${dimensionMap[this.breakpoint]})`).matches
 
       if (this.mediaMatched !== mediaMatched) {
-        this.$emit('input', this.mediaMatched)
+        this.$emit('update:modelValue', this.mediaMatched)
       }
     },
     onWindowResize () {

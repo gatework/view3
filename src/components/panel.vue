@@ -31,6 +31,7 @@ const prefixCls = 'ivu-collapse'
 export default {
   name: 'Panel',
   components: { Icon, CollapseTransition },
+  inject: ['CollapseInstance'],
   props: {
     name: {
       type: String,
@@ -69,11 +70,11 @@ export default {
   },
   mounted () {
     this.mounted = true
-    this.$parent.setActive()
+    this.CollapseInstance.setActive()
   },
   methods: {
     toggle () {
-      this.$parent.toggle({
+      this.CollapseInstance.toggle({
         name: this.name || this.index,
         isActive: this.isActive
       })

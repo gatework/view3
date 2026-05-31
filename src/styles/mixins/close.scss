@@ -1,3 +1,5 @@
+@use '../custom' as *;
+
 @mixin close-base($top: 0, $icon-font-size: 22px) {
   color: $legend-color;
   font-size: $icon-font-size;

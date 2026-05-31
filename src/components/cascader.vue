@@ -35,7 +35,7 @@
           v-show="showCloseIcon"
           type="ios-close-circle"
           :class="[prefixCls + '-arrow']"
-          @click.native.stop="clearSelect"
+          @click.stop="clearSelect"
         />
         <Icon
           :type="arrowType"

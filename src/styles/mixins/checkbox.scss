@@ -1,8 +1,11 @@
-@mixin checkbox-fn($checkbox-prefix-cls: unquote('#{$css-prefix}checkbox')) {
-  $checkbox-inner-prefix-cls: unquote('#{$checkbox-prefix-cls}-inner');
+@use 'sass:string';
+
+@use '../custom' as *;
+@mixin checkbox-fn($checkbox-prefix-cls: string.unquote('#{$css-prefix}checkbox')) {
+  $checkbox-inner-prefix-cls: string.unquote('#{$checkbox-prefix-cls}-inner');
 
   .#{$checkbox-prefix-cls}-focus {
-    box-shadow: 0 0 0 2px rgba($primary-color, 20%/100%);
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
     z-index: 1;
   }
 

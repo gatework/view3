@@ -92,7 +92,6 @@ export default {
     }
   },
   emits: ['click'],
-  emits: ['click'],
   computed: {
     showSlot () {
       return !!this.$slots.default
@@ -120,21 +119,13 @@ export default {
     },
     tagProps () {
       const { isHrefPattern } = this
-      let props = {}
 
       if (isHrefPattern) {
         const { linkUrl, target } = this
-        props = { href: linkUrl, target }
-      } else {
-        const { htmlType } = this
-        props = { type: htmlType }
+        return { href: linkUrl, target, disabled: this.itemDisabled || undefined }
       }
 
-      if (this.itemDisabled) {
-        props.disabled = true
-      }
-
-      return props
+      return { type: this.htmlType, disabled: this.itemDisabled || undefined }
     }
   },
   methods: {

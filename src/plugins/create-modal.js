@@ -1,19 +1,27 @@
 import { createApp, h } from 'vue'
-import mountWithContext from '../utils/mount-with-context'
+import mountWithContext, { unmountElement } from '../utils/mount-with-context'
 
 function createInstance (app, component, props, render, onRemove) {
   let node
+  let mountedElement
+  let removeTimer
+  let destroyed = false
 
   const instance = createApp({
     methods: {
       remove () {
-        setTimeout(() => {
+        clearTimeout(removeTimer)
+        removeTimer = setTimeout(() => {
           this.destroy()
         }, 300)
       },
       destroy () {
-        document.body.removeChild(this.$el)
-        onRemove()
+        if (destroyed) return
+
+        destroyed = true
+        clearTimeout(removeTimer)
+        unmountElement(mountedElement || this.$el)
+        onRemove?.()
       }
     },
     render () {
@@ -30,7 +38,7 @@ function createInstance (app, component, props, render, onRemove) {
     }
   })
 
-  mountWithContext(instance, app)
+  mountedElement = mountWithContext(instance, app)
 
   return {
     show () {

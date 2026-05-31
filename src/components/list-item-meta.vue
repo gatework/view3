@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import Avatar from '../../components/avatar/avatar.vue'
+import Avatar from './avatar.vue'
 
 export default {
   name: 'ListItemMeta',

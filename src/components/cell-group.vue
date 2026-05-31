@@ -8,9 +8,10 @@ export default {
   name: 'CellGroup',
   provide () {
     return {
-      cellGroup: this
+      CellGroupInstance: this
     }
   },
+  emits: ['on-click'],
   methods: {
     handleClick (name) {
       this.$emit('on-click', name)

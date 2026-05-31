@@ -1,3 +1,5 @@
+@use '../custom' as *;
+
 // sortable
 @mixin sortable() {
   cursor: pointer;

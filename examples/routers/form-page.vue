@@ -12,7 +12,8 @@
             label="Name"
             prop="name"
           >
-            <VInput              v-model="formValidate.name"
+            <VInput
+              v-model="formValidate.name"
               placeholder="Enter your name"
             />
           </FormItem>
@@ -20,7 +21,8 @@
             label="E-mail"
             prop="mail"
           >
-            <VInput              v-model="formValidate.mail"
+            <VInput
+              v-model="formValidate.mail"
               placeholder="Enter your e-mail"
             />
           </FormItem>
@@ -45,27 +47,29 @@
           </FormItem>
           <FormItem label="Date">
             <Row>
-              <Col span="11" >
-              <FormItem prop="date">
-                <DatePicker
-                  v-model="formValidate.date"
-                  type="date"
-                  placeholder="Select date"
-                />
-              </FormItem>
+              <Col span="11">
+                <FormItem prop="date">
+                  <DatePicker
+                    v-model="formValidate.date"
+                    type="date"
+                    placeholder="Select date"
+                  />
+                </FormItem>
               </Col>
               <Col
                 span="2"
                 style="text-align: center"
-              >-</Col>
-              <Col span="11" >
-              <FormItem prop="time">
-                <TimePicker
-                  v-model="formValidate.time"
-                  type="time"
-                  placeholder="Select time"
-                />
-              </FormItem>
+              >
+                -
+              </Col>
+              <Col span="11">
+                <FormItem prop="time">
+                  <TimePicker
+                    v-model="formValidate.time"
+                    type="time"
+                    placeholder="Select time"
+                  />
+                </FormItem>
               </Col>
             </Row>
           </FormItem>
@@ -97,7 +101,8 @@
             label="Desc"
             prop="desc"
           >
-            <VInput              v-model="formValidate.desc"
+            <VInput
+              v-model="formValidate.desc"
               type="textarea"
               :autosize="{minRows: 2,maxRows: 5}"
               placeholder="Enter something..."
@@ -196,7 +201,8 @@
             label="Name"
             prop="name"
           >
-            <VInput              v-model="formValidate.name"
+            <VInput
+              v-model="formValidate.name"
               placeholder="Enter your name"
             />
           </FormItem>
@@ -204,7 +210,8 @@
             label="E-mail"
             prop="mail"
           >
-            <VInput              v-model="formValidate.mail"
+            <VInput
+              v-model="formValidate.mail"
               placeholder="Enter your e-mail"
             />
           </FormItem>
@@ -229,27 +236,29 @@
           </FormItem>
           <FormItem label="Date">
             <Row>
-              <Col span="11" >
-              <FormItem prop="date">
-                <DatePicker
-                  v-model="formValidate.date"
-                  type="date"
-                  placeholder="Select date"
-                />
-              </FormItem>
+              <Col span="11">
+                <FormItem prop="date">
+                  <DatePicker
+                    v-model="formValidate.date"
+                    type="date"
+                    placeholder="Select date"
+                  />
+                </FormItem>
               </Col>
               <Col
                 span="2"
                 style="text-align: center"
-              >-</Col>
-              <Col span="11" >
-              <FormItem prop="time">
-                <TimePicker
-                  v-model="formValidate.time"
-                  type="time"
-                  placeholder="Select time"
-                />
-              </FormItem>
+              >
+                -
+              </Col>
+              <Col span="11">
+                <FormItem prop="time">
+                  <TimePicker
+                    v-model="formValidate.time"
+                    type="time"
+                    placeholder="Select time"
+                  />
+                </FormItem>
               </Col>
             </Row>
           </FormItem>
@@ -281,7 +290,8 @@
             label="Desc"
             prop="desc"
           >
-            <VInput              v-model="formValidate.desc"
+            <VInput
+              v-model="formValidate.desc"
               type="textarea"
               :autosize="{minRows: 2,maxRows: 5}"
               placeholder="Enter something..."
@@ -377,7 +387,8 @@
             label="name"
             prop="name"
           >
-            <VInput              v-model="formValidate5.name"
+            <VInput
+              v-model="formValidate5.name"
               placeholder="Enter your name"
             />
           </FormItem>
@@ -392,7 +403,8 @@
               required: true
             }]"
           >
-            <VInput              v-model="formValidate5.msg"
+            <VInput
+              v-model="formValidate5.msg"
               placeholder="msg"
             />
           </FormItem>
@@ -415,7 +427,8 @@
       </VButton>
       <br>
       <VInput value="" />
-      <VInput        value=""
+      <VInput
+        value=""
         disabled
       />
       <br>

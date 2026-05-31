@@ -41,10 +41,10 @@
   </div>
 </template>
 <script>
-import throttle from 'lodash.throttle'
+import throttle from '../utils/throttle'
 import loader from './loading-component.vue'
-import { on, off } from '../../utils/dom'
-import Locale from '../../mixins/locale'
+import { on, off } from '../utils/dom'
+import Locale from '../mixins/locale'
 
 const prefixCls = 'ivu-scroll'
 const dragConfig = {
@@ -264,7 +264,7 @@ export default {
     onScroll () {
       const el = this.$refs.scrollContainer
       if (this.isLoading || !el) return
-      const scrollDirection = Math.sign(this.lastScroll - el.scrollTop) // IE has no Math.sign, check that webpack polyfills this
+      const scrollDirection = Math.sign(this.lastScroll - el.scrollTop)
       const displacement = el.scrollHeight - el.clientHeight - el.scrollTop
 
       const topNegativeProximity = this.topProximityThreshold < 0 ? this.topProximityThreshold : 0

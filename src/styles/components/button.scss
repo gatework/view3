@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$btn-prefix-cls} {
   @include btn;
   @include btn-default;
@@ -204,12 +206,12 @@
   &-ghost.#{$btn-prefix-cls}-error[disabled] {
     background: transparent;
     border-color: $btn-disable-border;
-    color: rgba(#000, 25%/100%);
+    color: rgba(#000, 0.25);
   }
 
   &-ghost.#{$btn-prefix-cls}-text[disabled] {
     background: transparent;
-    color: rgba(#000, 25%/100%);
+    color: rgba(#000, 0.25);
   }
 }
 

@@ -292,22 +292,22 @@
     />
     <Divider>快捷方式</Divider>
     <Row>
-      <Col span="12" >
-      <DatePicker
-        type="date"
-        :options="options1"
-        placeholder="Select date"
-        style="width: 200px"
-      />
+      <Col span="12">
+        <DatePicker
+          type="date"
+          :options="options1"
+          placeholder="Select date"
+          style="width: 200px"
+        />
       </Col>
-      <Col span="12" >
-      <DatePicker
-        type="daterange"
-        :options="options2"
-        placement="bottom-end"
-        placeholder="Select date"
-        style="width: 200px"
-      />
+      <Col span="12">
+        <DatePicker
+          type="daterange"
+          :options="options2"
+          placement="bottom-end"
+          placeholder="Select date"
+          style="width: 200px"
+        />
       </Col>
     </Row>
   </div>

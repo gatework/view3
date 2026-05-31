@@ -1,12 +1,12 @@
 <template>
   <div>
-    <i-button @click.native="start">
+    <i-button @click="start">
       Start
     </i-button>
-    <i-button @click.native="finish">
+    <i-button @click="finish">
       Finish
     </i-button>
-    <i-button @click.native="error">
+    <i-button @click="error">
       Error
     </i-button>
   </div>

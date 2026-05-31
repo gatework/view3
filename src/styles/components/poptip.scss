@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$poptip-prefix-cls} {
   display: inline-block;
 
@@ -61,7 +63,7 @@
     font-size: $font-size-base;
     min-width: 150px;
 
-    &[x-placement^="top"] .#{$poptip-arrow}:after {
+    &[data-popper-placement^="top"] .#{$poptip-arrow}:after {
       border-bottom-width: 0;
       border-top-color: #fff;
       border-top-width: $poptip-arrow-width;
@@ -70,7 +72,7 @@
       margin-left: -$poptip-arrow-width;
     }
 
-    &[x-placement^="right"] .#{$poptip-arrow}:after {
+    &[data-popper-placement^="right"] .#{$poptip-arrow}:after {
       border-left-width: 0;
       border-right-color: #fff;
       border-right-width: $poptip-arrow-width;
@@ -79,7 +81,7 @@
       left: 1px;
     }
 
-    &[x-placement^="bottom"] .#{$poptip-arrow}:after {
+    &[data-popper-placement^="bottom"] .#{$poptip-arrow}:after {
       border-bottom-color: #fff;
       border-bottom-width: $poptip-arrow-width;
       border-top-width: 0;
@@ -88,7 +90,7 @@
       top: 1px;
     }
 
-    &[x-placement^="left"] .#{$poptip-arrow}:after {
+    &[data-popper-placement^="left"] .#{$poptip-arrow}:after {
       border-left-color: #fff;
       border-left-width: $poptip-arrow-width;
       border-right-width: 0;

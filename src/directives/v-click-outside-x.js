@@ -45,7 +45,6 @@ const commonHandler = function _onCommonEvent (context, instances, event) {
  * @param {Event} event - The event object.
  */
 const captureEventHandler = function onCaptureEvent (event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
   commonHandler(this, captureInstances, event)
 }
 
@@ -55,7 +54,6 @@ const captureEventHandler = function onCaptureEvent (event) {
  * @param {Event} event - The event object.
  */
 const nonCaptureEventHandler = function onNonCaptureEvent (event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
   commonHandler(this, nonCaptureInstances, event)
 }
 
@@ -154,7 +152,7 @@ export const directive = Object.defineProperties(
       }
     },
 
-    unmount: {
+    unmounted: {
       value: function unbind (el) {
         const compareElements = function _compareElements (item) {
           return item.el !== el

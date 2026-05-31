@@ -44,14 +44,14 @@
               <VButton
                 type="text"
                 size="small"
-                @click.native="cancel"
+                @click="cancel"
               >
                 {{ localeCancelText }}
               </VButton>
               <VButton
                 type="primary"
                 size="small"
-                @click.native="ok"
+                @click="ok"
               >
                 {{ localeOkText }}
               </VButton>
@@ -250,11 +250,11 @@ export default {
     // if trigger and children is input or textarea,listen focus & blur event
     if (this.trigger === 'focus') {
       this.$nextTick(() => {
-        const $children = this.getInputChildren()
-        if ($children) {
+        const childElement = this.getInputChildren()
+        if (childElement) {
           this.isInput = true
-          $children.addEventListener('focus', this.handleFocus, false)
-          $children.addEventListener('blur', this.handleBlur, false)
+          childElement.addEventListener('focus', this.handleFocus, false)
+          childElement.addEventListener('blur', this.handleBlur, false)
         }
       })
     }
@@ -336,15 +336,15 @@ export default {
     getInputChildren () {
       const $input = this.$refs.reference.querySelectorAll('input')
       const $textarea = this.$refs.reference.querySelectorAll('textarea')
-      let $children = null
+      let childElement = null
 
       if ($input.length) {
-        $children = $input[0]
+        childElement = $input[0]
       } else if ($textarea.length) {
-        $children = $textarea[0]
+        childElement = $textarea[0]
       }
 
-      return $children
+      return childElement
     },
     handleGetIndex () {
       transferIncrease()
@@ -354,11 +354,11 @@ export default {
       this.tIndex = this.handleGetIndex()
     }
   },
-  beforeUnmont () {
-    const $children = this.getInputChildren()
-    if ($children) {
-      $children.removeEventListener('focus', this.handleFocus, false)
-      $children.removeEventListener('blur', this.handleBlur, false)
+  beforeUnmount () {
+    const childElement = this.getInputChildren()
+    if (childElement) {
+      childElement.removeEventListener('focus', this.handleFocus, false)
+      childElement.removeEventListener('blur', this.handleBlur, false)
     }
   }
 }

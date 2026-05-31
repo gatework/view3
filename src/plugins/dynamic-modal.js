@@ -1,5 +1,6 @@
 import createInstance from './create-modal'
 import ModalComponent from '../components/modal'
+import DynamicDialog from './dynamic-dialog'
 
 const defaultOptions = {
   width: 620,
@@ -21,6 +22,23 @@ export default {
 
       instance.remove()
     }
+
+    DynamicDialog.remove()
+  },
+  info (props = {}) {
+    return DynamicDialog.info(props)
+  },
+  success (props = {}) {
+    return DynamicDialog.success(props)
+  },
+  warning (props = {}) {
+    return DynamicDialog.warning(props)
+  },
+  error (props = {}) {
+    return DynamicDialog.error(props)
+  },
+  confirm (props = {}) {
+    return DynamicDialog.confirm(props)
   },
 
   getModalInstance (component, props, options) {

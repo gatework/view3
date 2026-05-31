@@ -1,13 +1,13 @@
 <template>
   <div>
     <Page
+      v-model:current="current"
       prev-text="上一页"
       next-text="下一页"
       :total="total"
       show-sizer
       show-elevator
       show-total
-      :current.sync="current"
     />
     {{ current }}
     <VButton

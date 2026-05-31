@@ -73,7 +73,7 @@
                   :type="arrowType"
                   :custom="customArrowType"
                   :size="arrowSize"
-                  @click.native.stop="handleRemove(index)"
+                  @click.stop="handleRemove(index)"
                 />
               </div>
             </div>
@@ -98,20 +98,22 @@
         transfer
         @on-clickoutside="handleClickContextMenuOutside"
       >
-        <DropdownMenu slot="list">
-          <slot name="contextMenu" />
-        </DropdownMenu>
+        <template #list>
+          <DropdownMenu>
+            <slot name="contextMenu" />
+          </DropdownMenu>
+        </template>
       </Dropdown>
     </div>
   </div>
 </template>
 <script>
-import Icon from '../icon/icon.vue'
-import Render from '../base/render'
-import Dropdown from '../dropdown/dropdown.vue'
-import DropdownMenu from '../dropdown/dropdown-menu.vue'
-import { oneOf, MutationObserver, findComponentsDownward } from '../../utils/assist'
-import Emitter from '../../mixins/emitter'
+import Icon from './icon.vue'
+import Render from './render'
+import Dropdown from './dropdown.vue'
+import DropdownMenu from './dropdown-menu.vue'
+import { oneOf, MutationObserver, findComponentsDownward } from '../utils/assist'
+import Emitter from '../mixins/emitter'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
 const prefixCls = 'ivu-tabs'
@@ -145,7 +147,7 @@ export default {
     return { TabsInstance: this }
   },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number]
     },
     type: {
@@ -183,14 +185,22 @@ export default {
       default: false
     }
   },
+  emits: [
+    'update:modelValue',
+    'on-click',
+    'on-dblclick',
+    'on-contextmenu',
+    'on-tab-remove',
+    'on-drag-drop'
+  ],
   data () {
     return {
       prefixCls: prefixCls,
       navList: [],
       barWidth: 0,
       barOffset: 0,
-      activeKey: this.value,
-      focusedKey: this.value,
+      activeKey: this.modelValue,
+      focusedKey: this.modelValue,
       showSlot: false,
       navStyle: {
         transform: ''
@@ -201,7 +211,8 @@ export default {
       contextMenuStyles: {
         top: 0,
         left: 0
-      }
+      },
+      closedPanes: []
     }
   },
   computed: {
@@ -271,7 +282,7 @@ export default {
     }
   },
   watch: {
-    value (val) {
+    modelValue (val) {
       this.activeKey = val
       this.focusedKey = val
     },
@@ -315,11 +326,12 @@ export default {
   },
   methods: {
     getTabs () {
-      // return this.$children.filter(item => item.$options.name === 'TabPane');
       const AllTabPanes = findComponentsDownward(this, 'TabPane')
       const TabPanes = []
 
       AllTabPanes.forEach(item => {
+        if (this.closedPanes.includes(item)) return
+
         if (item.tab && this.name) {
           if (item.tab === this.name) {
             TabPanes.push(item)
@@ -402,7 +414,7 @@ export default {
       const nav = this.navList[index]
       if (!nav || nav.disabled) return
       this.activeKey = nav.name
-      this.$emit('input', nav.name)
+      this.$emit('update:modelValue', nav.name)
       this.$emit('on-click', nav.name)
     },
     handleDblclick (index) {
@@ -468,7 +480,10 @@ export default {
     handleRemoveTab (index) {
       const tabs = this.getTabs()
       const tab = tabs[index]
-      tab.$destroy()
+      if (!tab) return
+
+      if (!this.closedPanes.includes(tab)) this.closedPanes.push(tab)
+      tab.show = false
 
       if (tab.currentName === this.activeKey) {
         const newTabs = this.getTabs()
@@ -487,7 +502,7 @@ export default {
           }
         }
         this.activeKey = activeKey
-        this.$emit('input', activeKey)
+        this.$emit('update:modelValue', activeKey)
       }
       this.$emit('on-tab-remove', tab.currentName)
       this.updateNav()

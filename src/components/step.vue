@@ -34,15 +34,14 @@
   </div>
 </template>
 <script>
-import Emitter from '../../mixins/emitter'
-import { oneOf } from '../../utils/assist'
+import { oneOf } from '../utils/assist'
 
 const prefixCls = 'ivu-steps'
 const iconPrefixCls = 'ivu-icon'
 
 export default {
   name: 'Step',
-  mixins: [Emitter],
+  inject: ['StepsInstance'],
   props: {
     status: {
       validator (value) {
@@ -106,7 +105,7 @@ export default {
     status (val) {
       this.currentStatus = val
       if (this.currentStatus === 'error') {
-        this.$parent.setNextError()
+        this.StepsInstance.setNextError()
       }
     }
   },
@@ -114,10 +113,10 @@ export default {
     this.currentStatus = this.status
   },
   mounted () {
-    this.dispatch('Steps', 'append')
+    this.StepsInstance.registerStep(this)
   },
   beforeUnmount () {
-    this.dispatch('Steps', 'remove')
+    this.StepsInstance.unregisterStep(this)
   }
 }
 </script>

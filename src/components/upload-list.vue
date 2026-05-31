@@ -12,7 +12,7 @@
         v-show="file.status === 'finished'"
         type="ios-close"
         :class="[prefixCls + '-list-remove']"
-        @click.native="handleRemove(file)"
+        @click="handleRemove(file)"
       />
       <transition name="fade">
         <i-progress
@@ -26,8 +26,8 @@
   </ul>
 </template>
 <script>
-import Icon from '../icon/icon.vue'
-import iProgress from '../progress/progress.vue'
+import Icon from './icon.vue'
+import iProgress from './progress.vue'
 const prefixCls = 'ivu-upload'
 
 export default {

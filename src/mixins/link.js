@@ -24,8 +24,6 @@ export default {
   },
   computed: {
     linkUrl () {
-      const type = typeof this.to
-
       if (typeof this.to === 'string' && this.to.includes('//')) {
         /* Absolute URL, we do not need to route this */
         return this.to

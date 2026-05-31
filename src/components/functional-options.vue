@@ -5,11 +5,15 @@ export default {
   props: {
     options: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     },
     slotOptions: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     },
     slotUpdateHook: {
       type: Function,

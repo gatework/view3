@@ -54,10 +54,12 @@
           @on-clear="clearSingleSelect"
           @on-enter="handleCreateItem"
         >
-          <slot
-            slot="prefix"
-            name="prefix"
-          />
+          <template #prefix>
+            <slot
+
+              name="prefix"
+            />
+          </template>
         </SelectHead>
       </slot>
     </div>
@@ -423,7 +425,7 @@ export default {
       const currentIndex = this.focusIndex
       const selectedValues = this.values.filter(Boolean).map(({ value }) => value)
       if (this.autoComplete) {
-        const copyChildren = (node, fn) => {
+        const copyChildren = (node) => {
           return {
             ...node
           }
@@ -456,7 +458,7 @@ export default {
           })
 
           if (children.length > 0) {
-            selectOptions.push({ ...option, componentOptions: { ...cOptions, children: children } })
+            selectOptions.push({ ...option, componentOptions: { ...(option.componentOptions || {}), children: children } })
           }
         } else {
           if (this.filterQueryChange) {
@@ -515,6 +517,7 @@ export default {
     },
     query (query) {
       this.$emit('on-query-change', query)
+      this.broadcast('OptionGroup', 'on-query-change', [query])
       const { remoteMethod, lastRemoteQuery } = this
       const hasValidQuery = query !== lastRemoteQuery || !lastRemoteQuery
       const shouldCallRemoteMethod = remoteMethod && hasValidQuery && !this.preventRemoteCall
@@ -628,7 +631,7 @@ export default {
       }
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     this.mitt.off('on-select-selected')
   },
   methods: {

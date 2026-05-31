@@ -1,26 +1,10 @@
-<style lang="less">
-    .vertical-center-modal{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    .ivu-modal{
-        top: 0;
-    }
-    }
-
-    .placeholder {
-        min-height: 2000px;
-        width: 1px;
-    }
-</style>
 <template>
   <i-button @click="modal9 = true">
     距离顶部 20px
   </i-button>
   <Modal
+    v-model="modal9"
     title="对话框标题"
-    :visible.sync="modal9"
     :style="{top: '20px'}"
   >
     <p>对话框内容</p>
@@ -31,8 +15,8 @@
     垂直居中
   </i-button>
   <Modal
+    v-model="modal10"
     title="对话框标题"
-    :visible.sync="modal10"
     class-name="vertical-center-modal"
   >
     <p>对话框内容</p>
@@ -75,3 +59,19 @@ export default {
   }
 }
 </script>
+<style lang="less">
+    .vertical-center-modal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    .ivu-modal{
+        top: 0;
+    }
+    }
+
+    .placeholder {
+        min-height: 2000px;
+        width: 1px;
+    }
+</style>

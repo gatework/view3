@@ -3,12 +3,16 @@ import { createApp, h } from 'vue'
 import Modal from '../components/modal'
 import Button from '../components/button'
 import Locale from '../mixins/locale'
+import mountWithContext, { unmountElement } from '../utils/mount-with-context'
 
 const prefixCls = 'ivu-modal-confirm'
 
 function createInstance (properties) {
   let component
   let node
+  let mountedElement
+  let removeTimer
+  let destroyed = false
   const _props = properties || {}
 
   const instance = createApp({
@@ -79,13 +83,18 @@ function createInstance (properties) {
       },
       remove () {
         this.closing = true
-        setTimeout(() => {
+        clearTimeout(removeTimer)
+        removeTimer = setTimeout(() => {
           this.closing = false
           this.destroy()
         }, 300)
       },
       destroy () {
-        if (this.$el) document.body.removeChild(this.$el)
+        if (destroyed) return
+
+        destroyed = true
+        clearTimeout(removeTimer)
+        unmountElement(mountedElement || this.$el)
         this.onRemove()
       },
       onOk () {},
@@ -147,7 +156,7 @@ function createInstance (properties) {
         scrollable: this.scrollable,
         closable: this.closable,
         modelValue: this.visible,
-        onInput: (status) => {
+        'onUpdate:modelValue': (status) => {
           this.visible = status
         },
         onOnCancel: this.cancel
@@ -167,9 +176,7 @@ function createInstance (properties) {
     }
   })
 
-  const elem = document.createElement('div')
-
-  document.body.appendChild(instance.mount(elem).$el)
+  mountedElement = mountWithContext(instance)
 
   component = node.component.proxy
 

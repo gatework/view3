@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$divider-prefix-cls} {
   @include reset-component;
   background: $border-color-split;

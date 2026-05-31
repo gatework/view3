@@ -142,27 +142,6 @@
     <!--}-->
 <!--</script>-->
 
-<style>
-    .demo-spin-article{
-        /*width: 400px;*/
-        /*height: 200px;*/
-        padding: 10px;
-        position: relative;
-        border: 1px solid red;
-        text-align: center;
-    }
-    .demo-spin-article h3{
-        font-size: 22px;
-    }
-    .demo-spin-article address{
-        color: #999;
-        font-style: normal;
-        font-size: 14px;
-    }
-    .demo-spin-article p {
-        font-size: 16px;
-    }
-</style>
 <template>
   <div>
     <div class="demo-spin-article">
@@ -210,3 +189,24 @@ export default {
   }
 }
 </script>
+<style>
+    .demo-spin-article{
+        /*width: 400px;*/
+        /*height: 200px;*/
+        padding: 10px;
+        position: relative;
+        border: 1px solid red;
+        text-align: center;
+    }
+    .demo-spin-article h3{
+        font-size: 22px;
+    }
+    .demo-spin-article address{
+        color: #999;
+        font-style: normal;
+        font-size: 14px;
+    }
+    .demo-spin-article p {
+        font-size: 16px;
+    }
+</style>

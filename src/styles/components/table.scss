@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$table-prefix-cls} {
   background-color: #fff;
 

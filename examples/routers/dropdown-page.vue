@@ -21,7 +21,7 @@
         更多
         <Icon type="md-arrow-dropdown" />
       </VButton>
-      <template v-slot:list>
+      <template #list>
         <DropdownMenu>
           <DropdownItem>驴打滚</DropdownItem>
           <DropdownItem>炸酱面</DropdownItem>

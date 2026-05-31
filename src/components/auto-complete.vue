@@ -21,7 +21,6 @@
     <template #input>
       <VInput
         ref="input"
-        slot="input"
         v-model="currentValue"
         :element-id="elementId"
         :name="name"

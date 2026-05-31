@@ -1,8 +1,11 @@
+@use 'sass:map';
+@use '../core' as *;
+
 .#{$tag-prefix-cls} {
   @each $name, $colors in $colors-pallete {
-    $lightColor: map-get($colors, '1');
-    $lightBorderColor: map-get($colors, '3');
-    $darkColor: map-get($colors, '6');
+    $lightColor: map.get($colors, '1');
+    $lightBorderColor: map.get($colors, '3');
+    $darkColor: map.get($colors, '6');
 
     &-#{$name} {
       background: $lightColor;

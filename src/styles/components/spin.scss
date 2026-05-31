@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$spin-prefix-cls} {
   color: $primary-color;
   text-align: center;

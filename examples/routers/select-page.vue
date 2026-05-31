@@ -54,12 +54,12 @@
       v-model="model1"
       style="width:200px"
     >
-    <template #prefix>
-      <Icon
-        type="ios-alarm"
-        color="red"
-      />
-    </template>
+      <template #prefix>
+        <Icon
+          type="ios-alarm"
+          color="red"
+        />
+      </template>
       <VOption
         v-for="item in cityList"
         :key="item.value"

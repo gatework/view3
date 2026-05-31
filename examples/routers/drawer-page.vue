@@ -22,7 +22,7 @@
         title="抽屉标题"
         :styles="styles"
         @on-resize-width="hrw"
-@on-close="handleClose"
+        @on-close="handleClose"
       >
         <p>一些内容</p>
         <p>一些内容</p>

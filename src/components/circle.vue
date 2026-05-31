@@ -45,8 +45,8 @@
   </div>
 </template>
 <script>
-import { oneOf } from '../../utils/assist'
-import random from '../../utils/random_str'
+import { oneOf } from '../utils/assist'
+import random from '../utils/random_str'
 
 const prefixCls = 'ivu-chart-circle'
 

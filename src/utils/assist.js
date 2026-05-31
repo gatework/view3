@@ -1,4 +1,4 @@
-const isServer = false
+const isServer = typeof window === 'undefined' || typeof document === 'undefined'
 
 export function oneOf (value, validList) {
   for (let i = 0; i < validList.length; i++) {
@@ -67,13 +67,15 @@ function camelCase (name) {
 // getStyle
 export function getStyle (element, styleName) {
   if (!element || !styleName) return null
+  if (isServer) return element.style?.[styleName] || null
+
   styleName = camelCase(styleName)
   if (styleName === 'float') {
     styleName = 'cssFloat'
   }
   try {
     const computed = document.defaultView.getComputedStyle(element, '')
-    return element.style[styleName] || computed ? computed[styleName] : null
+    return element.style[styleName] || (computed ? computed[styleName] : null)
   } catch (e) {
     return element.style[styleName]
   }
@@ -89,7 +91,7 @@ export { firstUpperCase }
 export function warnProp (component, prop, correctType, wrongType) {
   correctType = firstUpperCase(correctType)
   wrongType = firstUpperCase(wrongType)
-    console.error(`[iView warn]: Invalid prop: type check failed for prop ${prop}. Expected ${correctType}, got ${wrongType}. (found in component: ${component})`);    // eslint-disable-line
+  console.error(`[iView warn]: Invalid prop: type check failed for prop ${prop}. Expected ${correctType}, got ${wrongType}. (found in component: ${component})`)
 }
 
 function typeOf (obj) {
@@ -138,6 +140,8 @@ export { deepCopy }
 
 // scrollTop animation
 export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
+  if (isServer || !el) return
+
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame = (
       window.webkitRequestAnimationFrame ||
@@ -181,6 +185,8 @@ function findComponentUpward (context, componentName, componentNames) {
   }
 
   let parent = context.$parent
+  if (!parent) return null
+
   let name = parent.$options.name
   while (parent && (!name || componentNames.indexOf(name) < 0)) {
     parent = parent.$parent
@@ -197,7 +203,10 @@ export function findComponentDownward (context, componentName) {
 
 // Find components downward
 export function findComponentsDownward (context, componentName) {
-  const children = context.$.subTree.children
+  const subTree = context?.$?.subTree
+  if (!subTree) return []
+
+  const children = subTree.children
 
   if (Array.isArray(children)) {
     return children.reduce((components, child) => {
@@ -216,10 +225,10 @@ export function findComponentsDownward (context, componentName) {
       }
     }, [])
   } else if (children && typeof children === 'object') {
-    const component = context.$.subTree.component
+    const component = subTree.component
 
     if (component && component.proxy && component.proxy.$options.name === componentName) {
-      return findComponentsDownward({ $: { subTree: { children: [context.$.subTree] } } }, componentName)
+      return findComponentsDownward({ $: { subTree: { children: [subTree] } } }, componentName)
     }
 
     if (component) {
@@ -247,24 +256,26 @@ export function findComponentsUpward (context, componentName) {
 
 // Find brothers components
 export function findBrothersComponents (context, componentName, exceptMe = true) {
+  if (!context?.$parent?.$?.subTree) return []
+
   const children = context.$parent.$.subTree.children
   if (!children || !Array.isArray(children)) return []
 
-  const res = context.$parent.$.subTree.children.filter(item => {
+  const res = context.$parent.$.subTree.children.map(item => {
     const child = item.component && item.component.proxy
 
     if (child) {
-      return child.$options.name === componentName
+      return child.$options.name === componentName ? child : null
     }
-  })
+  }).filter(Boolean)
 
   if (exceptMe) {
     const index = res.findIndex(item => item._uid === context._uid)
 
-    res.splice(index, 1)
+    if (index >= 0) res.splice(index, 1)
   }
 
-  return []
+  return res
 }
 
 /* istanbul ignore next */

@@ -79,7 +79,7 @@ export default {
   mounted () {
     this.updateNav()
   },
-  destroyed () {
+  unmounted () {
     this.updateNav()
   },
   methods: {

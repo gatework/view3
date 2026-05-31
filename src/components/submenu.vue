@@ -47,7 +47,7 @@
 import SelectDropdown from './select-dropdown'
 import Icon from './icon'
 import CollapseTransition from './collapse-transition'
-import { getStyle, findComponentUpward, findComponentsDownward } from '../utils/assist'
+import { getStyle, findComponentUpward, findComponentsDownward, findBrothersComponents } from '../utils/assist'
 import Emitter from '../mixins/emitter'
 import mixin from '../mixins/menu'
 
@@ -183,8 +183,8 @@ export default {
       if (this.mode === 'horizontal') return
       const opened = this.opened
       if (this.accordion) {
-        this.$parent.$children.forEach(item => {
-          if (item.$options.name === 'Submenu') item.opened = false
+        findBrothersComponents(this, 'Submenu').forEach(item => {
+          item.opened = false
         })
       }
       this.opened = !opened

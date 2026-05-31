@@ -1,3 +1,6 @@
+@use 'sass:string';
+
+@use '../core' as *;
 .#{$input-prefix-cls} {
   @include input;
 
@@ -209,7 +212,7 @@
 }
 
 .#{$input-prefix-cls}-group {
-  @include input-group(unquote('#{$input-prefix-cls}'));
+  @include input-group(string.unquote('#{$input-prefix-cls}'));
 }
 
 .#{$form-item-prefix-cls}-error {

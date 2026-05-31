@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$tree-prefix-cls} {
   position: relative;
 

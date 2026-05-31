@@ -62,7 +62,7 @@ export default {
       default: false
     }
   },
-  emits: ['update:modelValue', 'on-chage'],
+  emits: ['update:modelValue', 'on-change'],
   data () {
     return {
       currentValue: this.modelValue,
@@ -121,11 +121,9 @@ export default {
     if (this.parent) {
       this.group = true
       if (this.name && this.name !== this.parent.name) {
-        /* eslint-disable no-console */
         if (console.warn) {
           console.warn('[iview] Name does not match Radio Group name.')
         }
-        /* eslint-enable no-console */
       } else {
         this.groupName = this.parent.name
       }

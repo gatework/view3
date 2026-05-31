@@ -111,7 +111,11 @@ export default {
       return false
     })
     this.mitt.on('on-form-item-remove', (field) => {
-      if (field.prop) this.fields.splice(this.fields.indexOf(field), 1)
+      if (field?.prop) {
+        const index = this.fields.indexOf(field)
+
+        if (index >= 0) this.fields.splice(index, 1)
+      }
       return false
     })
   },
@@ -133,6 +137,7 @@ export default {
           if (typeof callback === 'function') {
             callback(valid)
           }
+          return
         }
         this.fields.forEach(field => {
           field.validate('', errors => {
@@ -150,16 +155,19 @@ export default {
         })
       })
     },
-    setErrors (errors) {
-      errors.forEach((error) => {
-        const field = this.fields.find((f) => f.prop === (error.source || error.key || error.field))
+    setErrors (errors = []) {
+      const normalizedErrors = Array.isArray(errors) ? errors : [errors]
 
-        console.log(errors)
-        if (field) {
-          field.setError(error.detail || error.message)
+      normalizedErrors.filter(Boolean).forEach((error) => {
+        const field = this.fields.find((f) => f.prop === (error.source || error.key || error.field))
+        const message = error.detail || error.message
+
+        if (!message) return
+
+        if (field && message) {
+          field.setError(message)
         } else {
-          this.genericErrors.push(error.detail || error.message)
-          console.log(this.genericErrors)
+          this.genericErrors.push(message)
         }
       })
     },

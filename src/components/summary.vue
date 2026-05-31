@@ -9,14 +9,14 @@
     >
       <colgroup>
         <col
-          v-for="(column, index) in columns"
+          v-for="column in columns"
           :width="setCellWidth(column)"
         >
       </colgroup>
       <tbody :class="[prefixCls + '-tbody']">
         <tr class="ivu-table-row">
           <td
-            v-for="(column, index) in columns"
+            v-for="column in columns"
             :class="alignCls(column)"
           >
             <div

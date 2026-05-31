@@ -22,7 +22,7 @@
         :class="iconClass"
         :color="lineColor"
         type="ios-close"
-        @click.native.stop="close"
+        @click.stop="close"
       />
     </div>
   </transition>
@@ -46,7 +46,7 @@
       :class="iconClass"
       :color="lineColor"
       type="ios-close"
-      @click.native.stop="close"
+      @click.stop="close"
     />
   </div>
 </template>

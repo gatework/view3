@@ -5,7 +5,7 @@
         type="primary"
         size="small"
         :disabled="!leftActive"
-        @click.native="moveToRight"
+        @click="moveToRight"
       >
         <span>{{ operations[1] }}</span> <Icon type="ios-arrow-forward" />
       </i-button>
@@ -13,7 +13,7 @@
         type="primary"
         size="small"
         :disabled="!rightActive"
-        @click.native="moveToLeft"
+        @click="moveToLeft"
       >
         <Icon type="ios-arrow-back" /> <span>{{ operations[0] }}</span>
       </i-button>
@@ -23,7 +23,7 @@
         type="primary"
         size="small"
         :disabled="!rightActive"
-        @click.native="moveToLeft"
+        @click="moveToLeft"
       >
         <Icon type="ios-arrow-back" /> <span>{{ operations[0] }}</span>
       </i-button>
@@ -31,7 +31,7 @@
         type="primary"
         size="small"
         :disabled="!leftActive"
-        @click.native="moveToRight"
+        @click="moveToRight"
       >
         <span>{{ operations[1] }}</span> <Icon type="ios-arrow-forward" />
       </i-button>
@@ -39,12 +39,13 @@
   </div>
 </template>
 <script>
-import iButton from '../button/button.vue'
-import Icon from '../icon/icon.vue'
+import iButton from './button.vue'
+import Icon from './icon.vue'
 
 export default {
   name: 'Operation',
   components: { iButton, Icon },
+  inject: ['TransferInstance'],
   props: {
     prefixCls: String,
     operations: Array,
@@ -54,10 +55,10 @@ export default {
   },
   methods: {
     moveToLeft () {
-      this.$parent.moveTo('left')
+      this.TransferInstance.moveTo('left')
     },
     moveToRight () {
-      this.$parent.moveTo('right')
+      this.TransferInstance.moveTo('right')
     }
   }
 }

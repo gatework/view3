@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$form-prefix-cls} {
   .#{$form-item-prefix-cls}-label {
     box-sizing: border-box;

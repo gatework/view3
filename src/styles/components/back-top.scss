@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$backtop-prefix-cls} {
   cursor: pointer;
   display: none;

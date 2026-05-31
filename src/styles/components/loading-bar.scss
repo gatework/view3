@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$loading-bar-prefix-cls} {
   left: 0;
   position: fixed;

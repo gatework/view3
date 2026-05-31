@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 .#{$tabs-prefix-cls} {
   @include clearfix;
   box-sizing: border-box;

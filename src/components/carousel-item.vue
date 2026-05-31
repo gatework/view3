@@ -12,6 +12,7 @@ const prefixCls = 'ivu-carousel-item'
 export default {
   componentName: 'carousel-item',
   name: 'CarouselItem',
+  inject: ['CarouselInstance'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -31,25 +32,25 @@ export default {
   },
   watch: {
     width (val) {
-      if (val && this.$parent.loop) {
+      if (val && this.CarouselInstance.loop) {
         this.$nextTick(() => {
-          this.$parent.initCopyTrackDom()
+          this.CarouselInstance.initCopyTrackDom()
         })
       }
     },
     height (val) {
-      if (val && this.$parent.loop) {
+      if (val && this.CarouselInstance.loop) {
         this.$nextTick(() => {
-          this.$parent.initCopyTrackDom()
+          this.CarouselInstance.initCopyTrackDom()
         })
       }
     }
   },
   mounted () {
-    this.$parent.slotChange()
+    this.CarouselInstance.registerSlide(this)
   },
-  beforeUnmont () {
-    this.$parent.slotChange()
+  beforeUnmount () {
+    this.CarouselInstance.unregisterSlide(this)
   }
 }
 </script>

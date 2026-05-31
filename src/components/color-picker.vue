@@ -30,13 +30,13 @@
       >
         <div :class="[prefixCls + '-color']">
           <div
-            v-show="value === '' && !visible"
+            v-show="currentValue === '' && !visible"
             :class="[prefixCls + '-color-empty']"
           >
             <i :class="[iconPrefixCls, iconPrefixCls + '-ios-close']" />
           </div>
           <div
-            v-show="value || visible"
+            v-show="currentValue || visible"
             :style="displayedColorStyle"
           />
         </div>
@@ -64,7 +64,7 @@
                   v-model="saturationColors"
                   :focused="visible"
                   @change="childChange"
-                  @keydown.native.tab="handleFirstTab"
+                  @keydown.tab="handleFirstTab"
                 />
               </div>
               <div
@@ -115,9 +115,9 @@
                 ref="clear"
                 :tabindex="0"
                 size="small"
-                @click.native="handleClear"
+                @click="handleClear"
                 @keydown.enter="handleClear"
-                @keydown.native.esc="closer"
+                @keydown.esc="closer"
               >
                 {{ t('i.datepicker.clear') }}
               </VButton>
@@ -126,10 +126,10 @@
                 :tabindex="0"
                 size="small"
                 type="primary"
-                @click.native="handleSuccess"
-                @keydown.native.tab="handleLastTab"
+                @click="handleSuccess"
+                @keydown.tab="handleLastTab"
                 @keydown.enter="handleSuccess"
-                @keydown.native.esc="closer"
+                @keydown.esc="closer"
               >
                 {{ t('i.datepicker.ok') }}
               </VButton>
@@ -170,7 +170,7 @@ export default {
   mixins: [Emitter, Locale, Prefixes, mixinsForm],
 
   props: {
-    value: {
+    modelValue: {
       type: String,
       default: undefined
     },
@@ -260,11 +260,19 @@ export default {
       type: String
     }
   },
+  emits: [
+    'update:modelValue',
+    'on-change',
+    'on-active-change',
+    'on-open-change',
+    'on-pick-success',
+    'on-pick-clear'
+  ],
 
   data () {
     return {
-      val: changeColor(this.value),
-      currentValue: this.value,
+      val: changeColor(this.modelValue),
+      currentValue: this.modelValue,
       dragging: false,
       visible: false,
       recommendedColor: [
@@ -356,7 +364,7 @@ export default {
       ]
     },
     displayedColorStyle () {
-      return { backgroundColor: toRGBAString(this.visible ? this.saturationColors.rgba : tinycolor(this.value).toRgb()) }
+      return { backgroundColor: toRGBAString(this.visible ? this.saturationColors.rgba : tinycolor(this.currentValue).toRgb()) }
     },
     formatColor () {
       const { format, saturationColors } = this
@@ -406,19 +414,25 @@ export default {
   },
 
   watch: {
-    value (newVal) {
+    modelValue (newVal) {
+      this.currentValue = newVal
       this.val = changeColor(newVal)
     },
     visible (val) {
-      this.val = changeColor(this.value)
+      this.val = changeColor(this.currentValue)
       this.$refs.drop[val ? 'update' : 'destroy']()
       this.$emit('on-open-change', Boolean(val))
     }
   },
 
   mounted () {
-    this.$on('on-escape-keydown', this.closer)
-    this.$on('on-dragging', this.setDragging)
+    this.mitt.on('on-escape-keydown', this.closer)
+    this.mitt.on('on-dragging', this.setDragging)
+  },
+
+  beforeUnmount () {
+    this.mitt.off('on-escape-keydown', this.closer)
+    this.mitt.off('on-dragging', this.setDragging)
   },
 
   methods: {
@@ -473,7 +487,7 @@ export default {
     },
     handleButtons (event, value) {
       this.currentValue = value
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
       this.$emit('on-change', value)
       this.dispatch('FormItem', 'on-form-change', value)
       this.closer(event)

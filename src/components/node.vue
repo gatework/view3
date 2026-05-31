@@ -26,7 +26,7 @@
           :model-value="data.checked"
           :indeterminate="data.indeterminate"
           :disabled="data.disabled || data.disableCheckbox"
-          @click.native.prevent="handleCheck"
+          @click.prevent="handleCheck"
         />
         <span
           :class="titleClasses"
@@ -61,12 +61,12 @@
   </collapse-transition>
 </template>
 <script>
-import Checkbox from '../checkbox/checkbox.vue'
-import Icon from '../icon/icon.vue'
+import Checkbox from './checkbox.vue'
+import Icon from './icon.vue'
 import Render from './render'
-import CollapseTransition from '../base/collapse-transition'
-import Emitter from '../../mixins/emitter'
-import { findComponentUpward } from '../../utils/assist'
+import CollapseTransition from './collapse-transition'
+import Emitter from '../mixins/emitter'
+import { findComponentUpward } from '../utils/assist'
 
 const prefixCls = 'ivu-tree'
 
@@ -183,7 +183,7 @@ export default {
       const item = this.data
       // if (item.disabled) return;
 
-      // Vue.js 2.6.9 对 transition 的 appear 进行了调整，导致 iView 初始化时无动画，加此方法来判断通过点击箭头展开时，加 appear，否则初始渲染时 appear 为 false
+    // 只有通过点击箭头展开时才启用 appear，避免初始渲染触发展开动画。
       this.appearByClickArrow = true
 
       // async loading

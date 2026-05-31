@@ -23,8 +23,8 @@
   </component>
 </template>
 <script>
-import { scrollTop, findComponentsDownward, sharpMatcherRegx } from '../../utils/assist'
-import { on, off } from '../../utils/dom'
+import { scrollTop, findComponentsDownward, sharpMatcherRegx } from '../utils/assist'
+import { on, off } from '../utils/dom'
 export default {
   name: 'Anchor',
   provide () {
@@ -207,7 +207,7 @@ export default {
       })
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     this.removeListener()
   }
 }

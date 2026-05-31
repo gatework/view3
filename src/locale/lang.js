@@ -1,15 +1,8 @@
-// using with vue-i18n in CDN
-/*eslint-disable */
-const isServer = false;
+const isServer = typeof window === 'undefined'
 
 export default function (lang) {
-    if (!isServer) {
-        if (typeof window.iview !== 'undefined') {
-            if (!('langs' in iview)) {
-                iview.langs = {};
-            }
-            iview.langs[lang.i.locale] = lang;
-        }
-    }
-};
-/* eslint-enable */
+  if (isServer || typeof window.iview === 'undefined') return
+
+  window.iview.langs ||= {}
+  window.iview.langs[lang.i.locale] = lang
+}

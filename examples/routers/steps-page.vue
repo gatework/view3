@@ -2,9 +2,11 @@
   <div style="border: 1px solid #ccc;">
     <Steps :current="1">
       <Step title="已完成">
-        <div slot="content">
-          这里是该步骤的描述信息
-        </div>
+        <template #content>
+          <div>
+            这里是该步骤的描述信息
+          </div>
+        </template>
       </Step>
       <Step
         title="进行中"
@@ -32,10 +34,12 @@
     <Divider />
     <Steps :current="1">
       <Step title="注册">
-        <Icon
-          slot="icon"
-          type="md-alarm"
-        />
+        <template #icon>
+          <Icon
+
+            type="md-alarm"
+          />
+        </template>
       </Step>
       <Step
         title="上传头像"

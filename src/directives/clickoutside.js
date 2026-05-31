@@ -1,25 +1,29 @@
 export default {
-  mounted (el, { value }, vnode) {
+  mounted (el, { value }) {
     function documentHandler (e) {
       if (el.contains(e.target)) {
         return false
       }
 
-      if (typeof value === 'function') {
-        value(e)
+      if (typeof el.__vueClickOutsideValue__ === 'function') {
+        el.__vueClickOutsideValue__(e)
       }
     }
 
+    el.__vueClickOutsideValue__ = value
     el.__vueClickOutside__ = documentHandler
 
     document.addEventListener('click', documentHandler)
   },
-  update () {
-
+  updated (el, { value }) {
+    el.__vueClickOutsideValue__ = value
   },
-  unmount (el, binding) {
-    document.removeEventListener('click', el.__vueClickOutside__)
+  unmounted (el) {
+    if (el.__vueClickOutside__) {
+      document.removeEventListener('click', el.__vueClickOutside__)
+    }
 
+    delete el.__vueClickOutsideValue__
     delete el.__vueClickOutside__
   }
 }

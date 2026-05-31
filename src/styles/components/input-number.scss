@@ -1,3 +1,6 @@
+@use 'sass:math';
+
+@use '../core' as *;
 @mixin handler-disabled() {
   color: #ccc !important;
   cursor: $cursor-disabled;
@@ -53,7 +56,7 @@
   &-handler {
     color: #999;
     display: block;
-    height: $input-height-base / 2;
+    height: math.div($input-height-base, 2);
     line-height: 0;
     overflow: hidden;
     position: relative;
@@ -124,7 +127,7 @@
       height: $input-height-large;
     }
     .#{$input-number-prefix-cls}-handler {
-      height: $input-height-large / 2;
+      height: math.div($input-height-large, 2);
     }
 
     input {
@@ -146,7 +149,7 @@
       height: $input-height-small;
     }
     .#{$input-number-prefix-cls}-handler {
-      height: $input-height-small / 2;
+      height: math.div($input-height-small, 2);
     }
 
     input {

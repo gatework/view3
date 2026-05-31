@@ -160,7 +160,7 @@
       :placement="placement"
       :transfer="transfer"
       :show-elevator="showElevator"
-      :_current.once="currentPage"
+      :_current="currentPage"
       :current="currentPage"
       :disabled="disabled"
       :all-pages="allPages"

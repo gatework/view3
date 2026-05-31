@@ -1,26 +1,45 @@
 import { createApp, h } from 'vue'
-import mountWithContext from '../utils/mount-with-context'
+import mountWithContext, { unmountElement } from '../utils/mount-with-context'
 
-import Popper from 'popper.js/dist/umd/popper.js'
+import { createPopper } from '@popperjs/core'
 import Popover from '../components/popover'
 
 let currentPopover
+let documentClickBound = false
+
+function isBrowser () {
+  return typeof document !== 'undefined'
+}
 
 function removeCurrentPopover () {
   if (currentPopover) {
-    currentPopover.destroy()
-    currentPopover.popper.remove()
+    currentPopover.popper.destroy()
+    unmountElement(currentPopover.element)
+    currentPopover = null
   }
 }
 
-document.addEventListener('click', (e) => {
-  if (currentPopover) {
-    removeCurrentPopover()
-  }
-})
+function handleDocumentClick (event) {
+  if (!currentPopover) return
+
+  const { element, trigger } = currentPopover
+  if (element.contains(event.target) || trigger?.contains(event.target)) return
+
+  removeCurrentPopover()
+}
+
+function bindDocumentClick () {
+  if (!isBrowser() || documentClickBound) return
+
+  document.addEventListener('click', handleDocumentClick)
+  documentClickBound = true
+}
 
 export default {
   show (el, component, options, context) {
+    if (!isBrowser()) return
+
+    bindDocumentClick()
     removeCurrentPopover()
 
     const instance = createApp({
@@ -36,7 +55,11 @@ export default {
 
     const node = mountWithContext(instance, this.app)
 
-    currentPopover = new Popper(el, node, { placement: 'top' })
+    currentPopover = {
+      element: node,
+      popper: createPopper(el, node, { placement: options?.placement || 'top' }),
+      trigger: el
+    }
   },
   remove () {
     removeCurrentPopover()

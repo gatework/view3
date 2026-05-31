@@ -1,12 +1,3 @@
-<style scoped>
-    .time{
-        font-size: 14px;
-        font-weight: bold;
-    }
-    .content{
-        padding-left: 5px;
-    }
-</style>
 <template>
   <div>
     <Timeline>
@@ -73,10 +64,12 @@
     </Timeline>
     <Timeline>
       <Timeline-item color="green">
-        <Icon
-          slot="dot"
-          type="trophy"
-        />
+        <template #dot>
+          <Icon
+
+            type="trophy"
+          />
+        </template>
         <span>发布里程碑版本</span>
       </Timeline-item>
       <Timeline-item>发布1.0版本</Timeline-item>
@@ -90,3 +83,12 @@ export default {
 
 }
 </script>
+<style scoped>
+    .time{
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .content{
+        padding-left: 5px;
+    }
+</style>

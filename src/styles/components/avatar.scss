@@ -1,3 +1,5 @@
+@use '../core' as *;
+
 @mixin avatar-size($size, $font-size) {
   border-radius: 50%;
   height: $size;

@@ -1,3 +1,5 @@
+@use '../custom' as *;
+
 @mixin placeholder($color: $input-placeholder-color) {
   // Firefox
   &::-moz-placeholder {

@@ -1,3 +1,6 @@
+@use '../custom' as *;
+@use 'size' as *;
+
 @mixin button-size($height, $padding, $font-size, $border-radius) {
   border-radius: $border-radius;
   font-size: $font-size;
@@ -289,7 +292,7 @@
 // for tabindex
 @mixin active-btn-color($color) {
   &:focus {
-    box-shadow: 0 0 0 2px rgba($color, 20%/100%);
+    box-shadow: 0 0 0 2px rgba($color, 0.2);
   }
 }
 @mixin btn-color($color) {

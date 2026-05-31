@@ -40,7 +40,6 @@
             </MenuItem>
           </MenuGroup>
         </Menu>
-        <!-- <div slot="trigger"><Icon type="document-text"></Icon></div> -->
       </Sider>
       <Layout class-name="test-class">
         <Header :style="{background: '#eee'}">

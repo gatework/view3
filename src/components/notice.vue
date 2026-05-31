@@ -208,7 +208,7 @@ export default {
       }
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     this.clearCloseTimer()
   }
 }

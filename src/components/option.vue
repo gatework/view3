@@ -10,7 +10,6 @@
 <script>
 import Emitter from '../mixins/emitter'
 import mixinsForm from '../mixins/form'
-import { findComponentUpward } from '../utils/assist'
 
 const prefixCls = 'ivu-select-item'
 

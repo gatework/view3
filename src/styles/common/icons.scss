@@ -1,5 +1,6 @@
-@import 'ionicons/dist/scss/ionicons-variables';
-@import 'ionicons/dist/scss/ionicons-icons';
+@use '../core' as *;
+@use 'ionicons/dist/scss/ionicons-variables' as *;
+@use 'ionicons/dist/scss/ionicons-icons';
 
 $ionicons-font-path: 'ionicons/dist/fonts';
 
@@ -13,20 +14,6 @@ $ionicons-font-path: 'ionicons/dist/fonts';
     url('#{$ionicons-font-path}/ionicons.woff?v=#{$ionicons-version}') format('woff'),
     url('#{$ionicons-font-path}/ionicons.ttf?v=#{$ionicons-version}') format('truetype'),
     url('#{$ionicons-font-path}/ionicons.svg?v=#{$ionicons-version}#Ionicons') format('svg');
-}
-
-@mixin ion() {
-  display: inline-block;
-  font-family: 'Ionicons';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 1;
-  speak: none;
-  text-rendering: auto;
-  text-transform: none;
 }
 
 .#{$icon-prefix-cls} {

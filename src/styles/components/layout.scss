@@ -1,3 +1,6 @@
+@use 'sass:math';
+
+@use '../core' as *;
 .#{$layout-prefix-cls} {
   background: $layout-body-background;
   display: flex;
@@ -78,7 +81,7 @@
         border-radius: 0 $border-radius-base $border-radius-base 0;
         color: #fff;
         cursor: pointer;
-        font-size: $layout-zero-trigger-width / 2;
+        font-size: math.div($layout-zero-trigger-width, 2);
         height: $layout-zero-trigger-height;
         line-height: $layout-zero-trigger-height;
         position: absolute;

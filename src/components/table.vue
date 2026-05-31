@@ -69,7 +69,7 @@
         >
           <tbody>
             <tr>
-              <td :style="{'height':bodyStyle.height,'width':`${this.headerWidth}px`}">
+              <td :style="{'height':bodyStyle.height,'width':`${headerWidth}px`}">
                 <span
                   v-if="!data || data.length === 0"
                   v-html="localeNoDataText"
@@ -214,9 +214,11 @@
         transfer
         @on-clickoutside="handleClickContextMenuOutside"
       >
-        <DropdownMenu slot="list">
-          <slot name="contextMenu" />
-        </DropdownMenu>
+        <template #list>
+          <DropdownMenu>
+            <slot name="contextMenu" />
+          </DropdownMenu>
+        </template>
       </Dropdown>
     </div>
     <Spin
@@ -1537,7 +1539,7 @@ export default {
       this.contextMenuVisible = false
     }
   },
-  beforeUnmont () {
+  beforeUnmount () {
     this.mitt.off('on-visible-change')
     off(window, 'resize', this.handleResize)
     this.observer.removeAllListeners(this.$el)

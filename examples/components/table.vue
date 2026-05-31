@@ -1,9 +1,14 @@
 <template>
-    <Table width="550" border :columns="columns2" :data="data3"></Table>
+  <Table
+    width="550"
+    border
+    :columns="columns2"
+    :data="data3"
+  />
 </template>
 <script>
     export default {
-        name: 'etable',
+        name: 'Etable',
         data () {
             return {
                 columns2: [

@@ -13,10 +13,12 @@
           label="附属内容"
           to="/button"
         >
-          <Badge
-            slot="extra"
-            :count="10"
-          />
+          <template #extra>
+            <Badge
+
+              :count="10"
+            />
+          </template>
         </Cell>
         <Cell
           title="标题一"
@@ -38,10 +40,12 @@
           selected
         />
         <Cell title="标题二">
-          <Icon
-            slot="icon"
-            type="trash-a"
-          />
+          <template #icon>
+            <Icon
+
+              type="trash-a"
+            />
+          </template>
         </Cell>
         <Cell><span style="color: #ff6600">六七十111</span></Cell>
         <Cell
@@ -69,10 +73,12 @@
           extra="详细信息"
         />
         <Cell title="标题八">
-          <i-switch
-            slot="extra"
-            v-model="switch1"
-          />
+          <template #extra>
+            <i-switch
+
+              v-model="switch1"
+            />
+          </template>
         </Cell>
         <Cell
           title="标题九"

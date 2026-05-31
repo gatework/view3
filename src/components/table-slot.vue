@@ -1,10 +1,8 @@
 <script>
-import { h } from 'vue'
+import { h, inject } from 'vue'
 
 export default {
   name: 'TableSlot',
-  functional: true,
-  inject: ['tableRoot'],
   props: {
     row: Object,
     index: Number,
@@ -17,18 +15,27 @@ export default {
       default: 'block'
     }
   },
-  render: ({ $props }) => {
-    return h('div', {
-      class: {
-        'ivu-table-cell-slot': true,
-        'ivu-table-cell-slot-inline': $props.display === 'inline',
-        'ivu-table-cell-slot-inline-block': $props.display === 'inline-block'
-      }
-    }, $props.tableRoot.$scopedSlots[$props.column.slot]({
-      row: $props.row,
-      column: $props.column,
-      index: $props.index
-    }))
+  setup (props) {
+    const tableRoot = inject('tableRoot')
+
+    return () => {
+      const slotName = props.column?.slot
+      const slot = slotName ? tableRoot?.$slots?.[slotName] : null
+
+      return h('div', {
+        class: {
+          'ivu-table-cell-slot': true,
+          'ivu-table-cell-slot-inline': props.display === 'inline',
+          'ivu-table-cell-slot-inline-block': props.display === 'inline-block'
+        }
+      }, slot
+        ? slot({
+            row: props.row,
+            column: props.column,
+            index: props.index
+          })
+        : [])
+    }
   }
 }
 </script>

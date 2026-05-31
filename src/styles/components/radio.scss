@@ -1,5 +1,7 @@
+@use '../core' as *;
+
 .#{$radio-prefix-cls}-focus {
-  box-shadow: 0 0 0 2px rgba($primary-color, 20%/100%);
+  box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
   z-index: 1;
 }
 
@@ -238,7 +240,7 @@ span.#{$radio-prefix-cls} + * {
     }
 
     &::after {
-      background: rgba($primary-color, 20%/100%);
+      background: rgba($primary-color, 0.2);
       height: $btn-circle-size + 4px;
       left: -1px;
       opacity: 0;
@@ -291,18 +293,18 @@ span.#{$radio-prefix-cls} + * {
       }
 
       &.#{$radio-prefix-cls}-focus {
-        box-shadow: -1px 0 0 0 $primary-color, 0 0 0 2px rgba($primary-color, 20%/100%);
+        box-shadow: -1px 0 0 0 $primary-color, 0 0 0 2px rgba($primary-color, 0.2);
         transition: all $transition-time ease-in-out;
 
         &::after {
-          background: rgba($primary-color, 20%/100%);
+          background: rgba($primary-color, 0.2);
           left: -3px;
           opacity: 1;
           top: -3px;
         }
 
         &:first-child {
-          box-shadow: 0 0 0 2px rgba($primary-color, 20%/100%);
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
         }
       }
 

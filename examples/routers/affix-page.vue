@@ -1,14 +1,3 @@
-<style>
-    body{
-        /*height: 2000px;*/
-    }
-    .demo-affix{
-        width: 100px;
-        height: 30px;
-        background: #f60;
-        color: #fff
-    }
-</style>
 <template>
   <div>
     <Affix>
@@ -16,7 +5,7 @@
         固定在最顶部
       </div>
     </Affix>
-    <div v-for="(item,index) in arr">
+    <div v-for="item in arr">
       {{ item }}
     </div>
   </div>
@@ -35,3 +24,14 @@ export default {
   }
 }
 </script>
+<style>
+    body{
+        /*height: 2000px;*/
+    }
+    .demo-affix{
+        width: 100px;
+        height: 30px;
+        background: #f60;
+        color: #fff
+    }
+</style>

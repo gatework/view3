@@ -8,12 +8,12 @@
   </div>
 </template>
 <script>
-import { getStyle } from '../utils/assist';  // eslint-disable-line
+import { createPopper } from '@popperjs/core'
+import { getStyle } from '../utils/assist';
 import { transferIndex, transferIncrease } from '../utils/transfer-queue'
 import Emitter from '../mixins/emitter'
 
-const isServer = false
-const Popper = isServer ? function () {} : require('popper.js/dist/umd/popper.js')
+const isServer = typeof window === 'undefined'
 
 export default {
   name: 'SelectDropdown',
@@ -67,27 +67,38 @@ export default {
       if (isServer) return
       this.$nextTick(() => {
         if (this.popper) {
-          this.popper.update()
+          this.popper.update().then(() => {
+            this.resetTransformOrigin()
+          })
           this.popperStatus = true
         } else {
-          this.popper = new Popper(this.$parent.$parent.$refs.reference, this.$el, {
-            eventsEnabled: false,
+          this.popper = createPopper(this.$parent.$parent.$refs.reference, this.$el, {
             placement: this.placement,
-            modifiers: {
-              computeStyle: {
-                gpuAcceleration: false
+            modifiers: [
+              {
+                name: 'computeStyles',
+                options: {
+                  gpuAcceleration: false
+                }
               },
-              preventOverflow: {
-                boundariesElement: 'window'
+              {
+                name: 'preventOverflow',
+                options: {
+                  boundary: 'viewport'
+                }
+              },
+              {
+                name: 'eventListeners',
+                options: {
+                  scroll: false,
+                  resize: false
+                }
               }
-            },
-            onCreate: () => {
-              this.resetTransformOrigin()
-              this.$nextTick(this.popper.update())
-            },
-            onUpdate: () => {
-              this.resetTransformOrigin()
-            }
+            ]
+          })
+
+          this.popper.update().then(() => {
+            this.resetTransformOrigin()
           })
         }
         // set a height for parent is Modal and Select's width is 100%
@@ -114,12 +125,13 @@ export default {
       // 不判断，Select 会报错，不知道为什么
       if (!this.popper) return
 
-      const x_placement = this.popper.popper.getAttribute('x-placement')
-      const placementStart = x_placement.split('-')[0]
-      const placementEnd = x_placement.split('-')[1]
-      const leftOrRight = x_placement === 'left' || x_placement === 'right'
+      const placement = this.popper.state.placement
+      const popper = this.popper.state.elements.popper
+      const placementStart = placement.split('-')[0]
+      const placementEnd = placement.split('-')[1]
+      const leftOrRight = placement === 'left' || placement === 'right'
       if (!leftOrRight) {
-        this.popper.popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom'
+        popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom'
       }
     },
     handleGetIndex () {

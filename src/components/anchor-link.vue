@@ -3,7 +3,7 @@
     <a
       :class="linkTitleClasses"
       :href="href"
-      :data-scroll-offset="scrollOffset"
+      :data-scroll-offset="mergedScrollOffset"
       :data-href="href"
       :title="title"
       @click.prevent="goAnchor"
@@ -20,9 +20,7 @@ export default {
     title: String,
     scrollOffset: {
       type: Number,
-      default () {
-        return this.anchorCom.scrollOffset
-      }
+      default: null
     }
   },
   data () {
@@ -36,6 +34,9 @@ export default {
         this.prefix,
         this.anchorCom.currentLink === this.href ? `${this.prefix}-active` : ''
       ]
+    },
+    mergedScrollOffset () {
+      return this.scrollOffset ?? this.anchorCom.scrollOffset
     },
     linkTitleClasses () {
       return [
