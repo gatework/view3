@@ -17,24 +17,30 @@ export default {
     // todo 4.5.0 已无效，强制 flex
     type: {
       validator (value) {
-        return oneOf(value, ['flex'])
-      }
+        return value == null || oneOf(value, ['flex'])
+      },
+      default: null
     },
     align: {
       validator (value) {
-        return oneOf(value, ['top', 'middle', 'bottom'])
-      }
+        return value == null || oneOf(value, ['top', 'middle', 'bottom'])
+      },
+      default: null
     },
     justify: {
       validator (value) {
-        return oneOf(value, ['start', 'end', 'center', 'space-around', 'space-between'])
-      }
+        return value == null || oneOf(value, ['start', 'end', 'center', 'space-around', 'space-between'])
+      },
+      default: null
     },
     gutter: {
       type: Number,
       default: 0
     },
-    className: String,
+    className: {
+      type: String,
+      default: ''
+    },
     // 4.5.0
     wrap: {
       type: Boolean,

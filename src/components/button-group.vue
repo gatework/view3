@@ -21,8 +21,9 @@ export default {
     },
     shape: {
       validator (value) {
-        return oneOf(value, ['circle', 'circle-outline'])
-      }
+        return value == null || oneOf(value, ['circle', 'circle-outline'])
+      },
+      default: null
     },
     vertical: {
       type: Boolean,

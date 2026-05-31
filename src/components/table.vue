@@ -282,17 +282,21 @@ export default {
       }
     },
     width: {
-      type: [Number, String]
+      type: [Number, String],
+      default: null
     },
     height: {
-      type: [Number, String]
+      type: [Number, String],
+      default: null
     },
     fixedHeight: {
-      type: [String]
+      type: [String],
+      default: null
     },
     // 3.4.0
     maxHeight: {
-      type: [Number, String]
+      type: [Number, String],
+      default: null
     },
     stripe: {
       type: Boolean,
@@ -317,13 +321,16 @@ export default {
       }
     },
     context: {
-      type: Object
+      type: Object,
+      default: null
     },
     noDataText: {
-      type: String
+      type: String,
+      default: null
     },
     noFilteredDataText: {
-      type: String
+      type: String,
+      default: null
     },
     disabledHover: {
       type: Boolean
@@ -350,7 +357,8 @@ export default {
     },
     // 4.0.0
     spanMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     // 4.0.0
     showSummary: {
@@ -359,11 +367,13 @@ export default {
     },
     // 4.0.0
     summaryMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     // 4.0.0
     sumText: {
-      type: String
+      type: String,
+      default: null
     },
     // 4.1.0
     indentSize: {
@@ -372,7 +382,8 @@ export default {
     },
     // 4.1.0
     loadData: {
-      type: Function
+      type: Function,
+      default: null
     },
     // 4.4.0
     updateShowChildren: {
@@ -390,6 +401,22 @@ export default {
       default: false
     }
   },
+  emits: [
+    'on-current-change',
+    'on-row-click',
+    'on-row-dblclick',
+    'on-contextmenu',
+    'on-select',
+    'on-select-cancel',
+    'on-selection-change',
+    'on-expand',
+    'on-expand-tree',
+    'on-select-all',
+    'on-select-all-cancel',
+    'on-sort-change',
+    'on-filter-change',
+    'on-drag-drop'
+  ],
   data () {
     const colsWithId = this.makeColumnsId(this.columns)
     return {
@@ -425,21 +452,21 @@ export default {
   },
   computed: {
     localeNoDataText () {
-      if (this.noDataText === undefined) {
+      if (this.noDataText == null) {
         return this.t('i.table.noDataText')
       } else {
         return this.noDataText
       }
     },
     localeNoFilteredDataText () {
-      if (this.noFilteredDataText === undefined) {
+      if (this.noFilteredDataText == null) {
         return this.t('i.table.noFilteredDataText')
       } else {
         return this.noFilteredDataText
       }
     },
     localeSumText () {
-      if (this.sumText === undefined) {
+      if (this.sumText == null) {
         return this.t('i.table.sumText')
       } else {
         return this.sumText
@@ -498,12 +525,9 @@ export default {
     tableStyle () {
       const style = {}
       if (this.tableWidth !== 0) {
-        let width = ''
-        if (this.bodyHeight === 0) {
-          width = this.tableWidth
-        } else {
-          width = this.tableWidth - (this.showVerticalScrollBar ? this.scrollBarWidth : 0)
-        }
+        const width = this.bodyHeight === 0
+          ? this.tableWidth
+          : this.tableWidth - (this.showVerticalScrollBar ? this.scrollBarWidth : 0)
         //                    const width = this.bodyHeight === 0 ? this.tableWidth : this.tableWidth - this.scrollBarWidth;
         style.width = `${width}px`
       }
@@ -512,9 +536,7 @@ export default {
     tableHeaderStyle () {
       const style = {}
       if (this.tableWidth !== 0) {
-        let width = ''
-        width = this.tableWidth
-        style.width = `${width}px`
+        style.width = `${this.tableWidth}px`
       }
       return style
     },
@@ -1521,8 +1543,8 @@ export default {
         params.filename = 'table.csv'
       }
 
-      let columns = []
-      let datas = []
+      let columns
+      let datas
       if (params.columns && params.data) {
         columns = params.columns
         datas = params.data

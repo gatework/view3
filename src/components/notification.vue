@@ -53,10 +53,12 @@ export default {
       }
     },
     content: {
-      type: String
+      type: String,
+      default: ''
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data () {

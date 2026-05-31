@@ -34,7 +34,10 @@
       <Icon type="ios-arrow-forward" />
     </button>
     <ul :class="dotsClasses">
-      <template v-for="n in slides.length">
+      <template
+        v-for="n in slides.length"
+        :key="n"
+      >
         <li
           :class="[n - 1 === currentIndex ? prefixCls + '-active' : '']"
           @click="dotsEvent('click', n - 1)"

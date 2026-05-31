@@ -69,7 +69,8 @@ export default {
       }
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     },
     stopPropagation: {
       type: Boolean,
@@ -83,7 +84,7 @@ export default {
       }
     }
   },
-  emits: ['on-clickoutside'],
+  emits: ['on-clickoutside', 'on-visible-change'],
   data () {
     return {
       prefixCls: prefixCls,

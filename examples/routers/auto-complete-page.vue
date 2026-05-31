@@ -9,6 +9,7 @@
     >
       <div
         v-for="item in data4"
+        :key="item.title"
         class="demo-auto-complete-item"
       >
         <div class="demo-auto-complete-group">

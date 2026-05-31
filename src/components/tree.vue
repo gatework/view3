@@ -78,17 +78,20 @@ export default {
       default: false
     },
     emptyText: {
-      type: String
+      type: String,
+      default: null
     },
     childrenKey: {
       type: String,
       default: 'children'
     },
     loadData: {
-      type: Function
+      type: Function,
+      default: null
     },
     render: {
-      type: Function
+      type: Function,
+      default: null
     },
     selectNode: {
       type: Boolean,
@@ -99,6 +102,7 @@ export default {
       default: false
     }
   },
+  emits: ['on-toggle-expand', 'on-select-change', 'on-check-change', 'on-contextmenu'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -114,7 +118,7 @@ export default {
   },
   computed: {
     localeEmptyText () {
-      if (typeof this.emptyText === 'undefined') {
+      if (this.emptyText == null) {
         return this.t('i.tree.emptyText')
       } else {
         return this.emptyText

@@ -45,18 +45,21 @@ export default {
   props: {
     status: {
       validator (value) {
-        return oneOf(value, ['wait', 'process', 'finish', 'error'])
-      }
+        return value == null || oneOf(value, ['wait', 'process', 'finish', 'error'])
+      },
+      default: null
     },
     title: {
       type: String,
       default: ''
     },
     content: {
-      type: String
+      type: String,
+      default: ''
     },
     icon: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data () {

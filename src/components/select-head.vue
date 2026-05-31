@@ -16,9 +16,10 @@
     </span>
     <div
       v-for="(item, index) in selectedMultiple"
+      :key="item.value ?? item.label ?? index"
       class="ivu-tag ivu-tag-checked"
     >
-      <template v-if="maxTagCount === undefined || index < maxTagCount">
+      <template v-if="maxTagCount == null || index < maxTagCount">
         <span
           class="ivu-tag-text"
           :class="{ 'ivu-select-multiple-tag-hidden': item.disabled }"
@@ -32,7 +33,7 @@
       </template>
     </div>
     <div
-      v-if="maxTagCount !== undefined && selectedMultiple.length > maxTagCount"
+      v-if="maxTagCount != null && selectedMultiple.length > maxTagCount"
       class="ivu-tag ivu-tag-checked"
     >
       <span class="ivu-tag-text ivu-select-max-tag">
@@ -107,7 +108,8 @@ export default {
       default: false
     },
     initialLabel: {
-      type: [String, Number, Array]
+      type: [String, Number, Array],
+      default: ''
     },
     values: {
       type: Array,
@@ -118,36 +120,43 @@ export default {
       default: false
     },
     inputElementId: {
-      type: String
+      type: String,
+      default: ''
     },
     placeholder: {
-      type: String
+      type: String,
+      default: null
     },
     queryProp: {
       type: String,
       default: ''
     },
     prefix: {
-      type: String
+      type: String,
+      default: ''
     },
     // 3.4.0
     maxTagCount: {
-      type: Number
+      type: Number,
+      default: null
     },
     // 3.4.0
     maxTagPlaceholder: {
-      type: Function
+      type: Function,
+      default: null
     },
     // 4.0.0
     allowCreate: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     // 4.0.0
     showCreateItem: {
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
-  emits: ['on-input-blur', 'on-query-change', 'on-input-focus', 'on-keydown'],
+  emits: ['on-input-blur', 'on-query-change', 'on-input-focus', 'on-keydown', 'on-enter', 'on-clear'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -201,7 +210,7 @@ export default {
       return style
     },
     localePlaceholder () {
-      if (this.placeholder === undefined) {
+      if (this.placeholder == null) {
         return this.t('i.select.placeholder')
       } else {
         return this.placeholder

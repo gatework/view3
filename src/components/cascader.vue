@@ -71,6 +71,7 @@
             <ul :class="[selectPrefixCls + '-dropdown-list']">
               <li
                 v-for="(item, index) in querySelections"
+                :key="item.value ?? index"
                 :class="[selectPrefixCls + '-item', {
                   [selectPrefixCls + '-item-disabled']: item.disabled
                 }]"
@@ -132,7 +133,8 @@ export default {
       default: true
     },
     placeholder: {
-      type: String
+      type: String,
+      default: null
     },
     size: {
       validator (value) {
@@ -159,14 +161,16 @@ export default {
       }
     },
     loadData: {
-      type: Function
+      type: Function,
+      default: null
     },
     filterable: {
       type: Boolean,
       default: false
     },
     notFoundText: {
-      type: String
+      type: String,
+      default: null
     },
     transfer: {
       type: Boolean,
@@ -175,10 +179,12 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     // 4.0.0
     capture: {
@@ -188,7 +194,8 @@ export default {
       }
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   emits: ['on-visible-change', 'update:modelValue', 'on-change'],
@@ -234,7 +241,7 @@ export default {
       return this.filterable ? '' : this.displayRender
     },
     localePlaceholder () {
-      if (this.placeholder === undefined) {
+      if (this.placeholder == null) {
         return this.t('i.select.placeholder')
       } else {
         return this.placeholder
@@ -244,7 +251,7 @@ export default {
       return this.filterable && this.currentValue.length ? null : this.localePlaceholder
     },
     localeNotFoundText () {
-      if (this.notFoundText === undefined) {
+      if (this.notFoundText == null) {
         return this.t('i.select.noMatch')
       } else {
         return this.notFoundText

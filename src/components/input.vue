@@ -185,13 +185,17 @@ export default {
       default: ''
     },
     maxlength: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     },
     disabled: {
       type: Boolean,
       default: false
     },
-    icon: String,
+    icon: {
+      type: String,
+      default: ''
+    },
     autosize: {
       type: [Boolean, Object],
       default: false
@@ -205,7 +209,8 @@ export default {
       default: false
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     number: {
       type: Boolean,
@@ -228,7 +233,8 @@ export default {
       default: false
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     wrap: {
       validator (value) {
@@ -279,7 +285,8 @@ export default {
     'on-keyup',
     'on-click',
     'on-focus',
-    'on-blur'
+    'on-blur',
+    'on-clear'
   ],
   data () {
     return {

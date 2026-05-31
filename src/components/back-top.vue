@@ -35,6 +35,7 @@ export default {
       default: 1000
     }
   },
+  emits: ['on-click'],
   data () {
     return {
       backTop: false

@@ -2,6 +2,7 @@
   <div :class="classes">
     <span
       v-for="cell in cells"
+      :key="cell.text"
       :class="getCellCls(cell)"
       @click="handleClick(cell, $event)"
       @mouseenter="handleMouseMove(cell)"

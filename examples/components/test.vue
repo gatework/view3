@@ -33,7 +33,10 @@
 <script>
     export default {
         props: {
-            row: Object
+            row: {
+                type: Object,
+                default: () => ({})
+            }
         }
     };
 </script>

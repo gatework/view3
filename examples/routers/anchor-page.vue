@@ -19,8 +19,7 @@
         @on-select="handleSelect"
       >
         <AnchorLink
-          v-for="link in 300"
-          v-if="(link - 1) % 30 === 0"
+          v-for="link in anchorLinks"
           :key="`link${link}`"
           :href="`#title-${link}`"
           :title="`title-${link}`"
@@ -218,6 +217,11 @@ export default {
       scrollCon: '',
       con: 'div',
       showNewLink: false
+    }
+  },
+  computed: {
+    anchorLinks () {
+      return Array.from({ length: 10 }, (_, index) => index * 30 + 1)
     }
   },
   mounted () {

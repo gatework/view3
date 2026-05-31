@@ -19,9 +19,18 @@
 <script>
 export default {
   props: {
-    datePanelLabel: Object,
-    currentView: String,
-    datePrefixCls: String
+    datePanelLabel: {
+      type: Object,
+      default: () => ({})
+    },
+    currentView: {
+      type: String,
+      default: ''
+    },
+    datePrefixCls: {
+      type: String,
+      default: 'ivu-date-picker'
+    }
   }
 }
 </script>

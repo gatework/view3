@@ -4,7 +4,10 @@ import { h } from 'vue'
 export default {
   name: 'RenderCell',
   props: {
-    render: Function
+    render: {
+      type: Function,
+      default: null
+    }
   },
   setup (props) {
     return () => {

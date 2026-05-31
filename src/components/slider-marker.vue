@@ -5,7 +5,8 @@ export default {
   name: 'SliderMarker',
   props: {
     mark: {
-      type: [String, Object]
+      type: [String, Object],
+      default: ''
     }
   },
   render () {

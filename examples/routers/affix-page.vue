@@ -5,7 +5,10 @@
         固定在最顶部
       </div>
     </Affix>
-    <div v-for="item in arr">
+    <div
+      v-for="item in arr"
+      :key="item"
+    >
       {{ item }}
     </div>
   </div>

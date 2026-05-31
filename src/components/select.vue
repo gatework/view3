@@ -232,24 +232,28 @@ export default {
       default: false
     },
     placeholder: {
-      type: String
+      type: String,
+      default: null
     },
     filterable: {
       type: Boolean,
       default: false
     },
     filterMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     remoteMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     loading: {
       type: Boolean,
       default: false
     },
     loadingText: {
-      type: String
+      type: String,
+      default: null
     },
     size: {
       validator (value) {
@@ -264,7 +268,8 @@ export default {
       default: false
     },
     notFoundText: {
-      type: String
+      type: String,
+      default: null
     },
     placement: {
       validator (value) {
@@ -283,22 +288,28 @@ export default {
       default: false
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     },
     prefix: {
-      type: String
+      type: String,
+      default: ''
     },
     maxTagCount: {
-      type: Number
+      type: Number,
+      default: null
     },
     maxTagPlaceholder: {
-      type: Function
+      type: Function,
+      default: null
     },
     allowCreate: {
       type: Boolean,
@@ -315,7 +326,17 @@ export default {
       default: false
     }
   },
-  emits: ['update:modelValue', 'on-change', 'on-open-change', 'on-query-change', 'on-select'],
+  emits: [
+    'update:modelValue',
+    'on-change',
+    'on-open-change',
+    'on-query-change',
+    'on-select',
+    'on-set-default-options',
+    'on-clear',
+    'on-clickoutside',
+    'on-create'
+  ],
   data () {
     return {
       prefixCls: prefixCls,
@@ -366,14 +387,14 @@ export default {
       }
     },
     localeNotFoundText () {
-      if (typeof this.notFoundText === 'undefined') {
+      if (this.notFoundText == null) {
         return this.t('i.select.noMatch')
       } else {
         return this.notFoundText
       }
     },
     localeLoadingText () {
-      if (typeof this.loadingText === 'undefined') {
+      if (this.loadingText == null) {
         return this.t('i.select.loading')
       } else {
         return this.loadingText

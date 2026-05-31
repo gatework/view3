@@ -20,7 +20,10 @@
       </a>
     </template>
     <ul>
-      <li v-for="item in movieList">
+      <li
+        v-for="item in movieList"
+        :key="item.url"
+      >
         <a
           :href="item.url"
           target="_blank"

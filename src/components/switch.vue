@@ -59,19 +59,25 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     loading: {
       type: Boolean,
       default: false
     },
     trueColor: {
-      type: String
+      type: String,
+      default: ''
     },
     falseColor: {
-      type: String
+      type: String,
+      default: ''
     },
-    beforeChange: Function
+    beforeChange: {
+      type: Function,
+      default: null
+    }
   },
   emits: ['update:modelValue', 'on-change'],
   data () {

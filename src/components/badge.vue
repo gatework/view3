@@ -50,7 +50,10 @@ const prefixCls = 'ivu-badge'
 export default {
   name: 'Badge',
   props: {
-    count: Number,
+    count: {
+      type: Number,
+      default: null
+    },
     dot: {
       type: Boolean,
       default: false
@@ -59,7 +62,10 @@ export default {
       type: [Number, String],
       default: 99
     },
-    className: String,
+    className: {
+      type: String,
+      default: ''
+    },
     showZero: {
       type: Boolean,
       default: false
@@ -71,18 +77,22 @@ export default {
     status: {
       validator (value) {
         return oneOf(value, ['success', 'processing', 'default', 'error', 'warning'])
-      }
+      },
+      default: ''
     },
     type: {
       validator (value) {
         return oneOf(value, ['success', 'primary', 'normal', 'error', 'warning', 'info'])
-      }
+      },
+      default: ''
     },
     offset: {
-      type: Array
+      type: Array,
+      default: () => []
     },
     color: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -157,7 +167,7 @@ export default {
     },
     hasCount () {
       if (this.count || this.text !== '') return true
-      if (this.showZero && parseInt(this.count) === 0) return true
+      if (this.showZero && this.count !== null && parseInt(this.count) === 0) return true
       else return false
     },
     alone () {

@@ -18,16 +18,26 @@ export default {
       type: Number,
       default: 5
     },
-    reference: Object,
-    popper: Object,
+    reference: {
+      type: Object,
+      default: null
+    },
+    popper: {
+      type: Object,
+      default: null
+    },
     offset: {
+      type: [Number, String],
       default: 0
     },
     modelValue: {
       type: Boolean,
       default: false
     },
-    transition: String,
+    transition: {
+      type: String,
+      default: ''
+    },
     options: {
       type: Object,
       default () {
@@ -39,7 +49,7 @@ export default {
     //     default: false
     // }
   },
-  emits: ['on-popper-show', 'on-popper-hide', 'created'],
+  emits: ['update:modelValue', 'on-popper-show', 'on-popper-hide', 'created'],
   data () {
     return {
       visible: this.modelValue

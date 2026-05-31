@@ -57,7 +57,8 @@ export default {
       default: false
     },
     data: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     name: {
       type: String,
@@ -85,12 +86,17 @@ export default {
       }
     },
     accept: {
-      type: String
+      type: String,
+      default: ''
     },
     maxSize: {
-      type: Number
+      type: Number,
+      default: null
     },
-    beforeUpload: Function,
+    beforeUpload: {
+      type: Function,
+      default: null
+    },
     onProgress: {
       type: Function,
       default () {

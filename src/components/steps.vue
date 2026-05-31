@@ -43,8 +43,9 @@ export default {
     },
     size: {
       validator (value) {
-        return oneOf(value, ['small'])
-      }
+        return value == null || oneOf(value, ['small'])
+      },
+      default: null
     },
     direction: {
       validator (value) {

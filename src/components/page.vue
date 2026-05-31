@@ -160,7 +160,6 @@
       :placement="placement"
       :transfer="transfer"
       :show-elevator="showElevator"
-      :_current="currentPage"
       :current="currentPage"
       :disabled="disabled"
       :all-pages="allPages"
@@ -214,8 +213,9 @@ export default {
     },
     size: {
       validator (value) {
-        return oneOf(value, ['small'])
-      }
+        return value == null || oneOf(value, ['small'])
+      },
+      default: null
     },
     simple: {
       type: Boolean,
@@ -234,10 +234,12 @@ export default {
       default: false
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     styles: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     prevText: {
       type: String,
@@ -252,7 +254,7 @@ export default {
       default: false
     }
   },
-  emits: ['update:current', 'on-change'],
+  emits: ['update:current', 'update:page-size', 'on-change', 'on-page-size-change'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -413,7 +415,7 @@ export default {
       } else if (key === 40) {
         this.next()
       } else if (key === 13) {
-        let page = 1
+        let page
 
         if (val > this.allPages) {
           page = this.allPages

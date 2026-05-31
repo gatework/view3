@@ -83,7 +83,8 @@ export default {
       default: false
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     clearable: {
       type: Boolean,
@@ -148,15 +149,10 @@ export default {
       const currentIndex = this.isHover ? hoverIndex : this.currentValue
 
       let full = false
-      let isLast = false
 
       if (currentIndex >= value) full = true
 
-      if (this.isHover) {
-        isLast = currentIndex === value
-      } else {
-        isLast = Math.ceil(this.currentValue) === value
-      }
+      const isLast = this.isHover ? currentIndex === value : Math.ceil(this.currentValue) === value
 
       return [
         {

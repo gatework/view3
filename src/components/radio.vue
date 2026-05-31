@@ -39,7 +39,8 @@ export default {
       default: false
     },
     label: {
-      type: [String, Number]
+      type: [String, Number],
+      default: ''
     },
     disabled: {
       type: Boolean,
@@ -54,7 +55,8 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     // 4.0.0
     border: {

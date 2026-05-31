@@ -257,7 +257,8 @@ export default {
       }
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   emits: [

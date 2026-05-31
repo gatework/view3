@@ -20,9 +20,18 @@ export default {
   name: 'Casitem',
   components: { Icon },
   props: {
-    data: Object,
-    prefixCls: String,
-    tmpItem: Object
+    data: {
+      type: Object,
+      default: () => ({})
+    },
+    prefixCls: {
+      type: String,
+      default: 'ivu-cascader'
+    },
+    tmpItem: {
+      type: Object,
+      default: () => ({})
+    }
   },
   computed: {
     classes () {

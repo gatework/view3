@@ -46,6 +46,7 @@
               />
               <div
                 v-for="(item, index) in navList"
+                :key="item.name ?? index"
                 :class="tabCls(item)"
                 :draggable="draggable"
                 @click="handleChange(index)"
@@ -148,7 +149,8 @@ export default {
   },
   props: {
     modelValue: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     },
     type: {
       validator (value) {
@@ -174,10 +176,14 @@ export default {
       type: Boolean,
       default: false
     },
-    beforeRemove: Function,
+    beforeRemove: {
+      type: Function,
+      default: null
+    },
     // Tabs 嵌套时，用 name 区分层级
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     // 4.3.0
     draggable: {

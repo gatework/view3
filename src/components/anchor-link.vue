@@ -16,8 +16,14 @@ export default {
   name: 'AnchorLink',
   inject: ['anchorCom'],
   props: {
-    href: String,
-    title: String,
+    href: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
     scrollOffset: {
       type: Number,
       default: null

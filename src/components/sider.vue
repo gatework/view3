@@ -52,8 +52,9 @@ export default {
     breakpoint: {
       type: String,
       validator (val) {
-        return oneOf(val, ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'])
-      }
+        return val == null || oneOf(val, ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'])
+      },
+      default: null
     },
     collapsible: {
       type: Boolean,

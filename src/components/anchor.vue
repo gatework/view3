@@ -41,13 +41,19 @@ export default {
       type: Number,
       default: 0
     },
-    offsetBottom: Number,
+    offsetBottom: {
+      type: Number,
+      default: null
+    },
     bounds: {
       type: Number,
       default: 5
     },
     //        container: [String, HTMLElement],  // HTMLElement 在 SSR 下不支持
-    container: null,
+    container: {
+      type: [String, Object],
+      default: null
+    },
     showInk: {
       type: Boolean,
       default: false
@@ -57,6 +63,7 @@ export default {
       default: 0
     }
   },
+  emits: ['on-change'],
   data () {
     return {
       prefix: 'ivu-anchor',

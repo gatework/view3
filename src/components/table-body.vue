@@ -10,12 +10,30 @@ export default {
   components: { TableCell, Expand, TableTr },
   mixins: [Mixin],
   props: {
-    prefixCls: String,
-    styleObject: Object,
-    columns: Array,
-    data: Array, // rebuildData
-    objData: Object,
-    columnsWidth: Object,
+    prefixCls: {
+      type: String,
+      default: 'ivu-table'
+    },
+    styleObject: {
+      type: Object,
+      default: () => ({})
+    },
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    data: {
+      type: Array,
+      default: () => []
+    }, // rebuildData
+    objData: {
+      type: Object,
+      default: () => ({})
+    },
+    columnsWidth: {
+      type: Object,
+      default: () => ({})
+    },
     fixed: {
       type: [Boolean, String],
       default: false

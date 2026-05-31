@@ -24,7 +24,8 @@ export default {
       default: 'bottom-start'
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     transfer: {
       type: Boolean

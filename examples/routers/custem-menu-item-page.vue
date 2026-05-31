@@ -25,10 +25,16 @@ export default {
   props: {
     parentItem: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
-    theme: String,
-    iconSize: Number
+    theme: {
+      type: String,
+      default: 'light'
+    },
+    iconSize: {
+      type: Number,
+      default: 14
+    }
   },
   computed: {
     parentName () {

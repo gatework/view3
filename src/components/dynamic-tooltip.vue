@@ -2,25 +2,23 @@
   <div
     :class="[prefixCls]"
   >
-    <transition name="fade">
-      <div
-        ref="popper"
-        :class="dropdownCls"
-        :style="dropStyles"
-      >
-        <div :class="[prefixCls + '-content']">
-          <div :class="[prefixCls + '-arrow']" />
-          <div
-            :class="innerClasses"
-            :style="innerStyles"
-          >
-            <slot name="content">
-              {{ content }}
-            </slot>
-          </div>
+    <div
+      ref="popper"
+      :class="dropdownCls"
+      :style="dropStyles"
+    >
+      <div :class="[prefixCls + '-content']">
+        <div :class="[prefixCls + '-arrow']" />
+        <div
+          :class="innerClasses"
+          :style="innerStyles"
+        >
+          <slot name="content">
+            {{ content }}
+          </slot>
         </div>
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -41,7 +39,8 @@ export default {
       default: 'dark'
     },
     maxWidth: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     }
   },
   emits: ['update:modelValue'],

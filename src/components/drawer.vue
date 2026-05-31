@@ -93,7 +93,8 @@ export default {
       default: false
     },
     title: {
-      type: String
+      type: String,
+      default: ''
     },
     width: {
       type: [Number, String],
@@ -112,10 +113,12 @@ export default {
       default: true
     },
     maskStyle: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     styles: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     scrollable: {
       type: Boolean,
@@ -138,7 +141,8 @@ export default {
       }
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     inner: {
       type: Boolean,
@@ -149,9 +153,12 @@ export default {
       type: Boolean,
       default: false
     },
-    beforeClose: Function
+    beforeClose: {
+      type: Function,
+      default: null
+    }
   },
-  emits: ['visible-change', 'close', 'update:modelValue'],
+  emits: ['visible-change', 'close', 'update:modelValue', 'on-resize-width'],
   data () {
     return {
       prefixCls: prefixCls,

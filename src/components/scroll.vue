@@ -64,18 +64,25 @@ export default {
       default: 300
     },
     onReachTop: {
-      type: Function
+      type: Function,
+      default: null
     },
     onReachBottom: {
-      type: Function
+      type: Function,
+      default: null
     },
     onReachEdge: {
-      type: Function
+      type: Function,
+      default: null
     },
     loadingText: {
-      type: String
+      type: String,
+      default: null
     },
-    distanceToEdge: [Number, Array],
+    distanceToEdge: {
+      type: [Number, Array],
+      default: 20
+    },
     stopSlide: {
       type: Boolean,
       default: false
@@ -135,7 +142,7 @@ export default {
       }
     },
     localeLoadingText () {
-      if (this.loadingText === undefined) {
+      if (this.loadingText == null) {
         return this.t('i.select.loading')
       } else {
         return this.loadingText
@@ -157,7 +164,6 @@ export default {
 
     calculateProximityThreshold () {
       const dte = this.distanceToEdge
-      if (typeof dte === 'undefined') return [20, 20]
       return Array.isArray(dte) ? dte : [dte, dte]
     },
 

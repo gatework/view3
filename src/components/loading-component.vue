@@ -25,8 +25,22 @@ import Icon from './icon.vue'
 const prefixCls = 'ivu-scroll'
 
 export default {
+  name: 'LoadingComponent',
   components: { Spin, Icon },
-  props: ['text', 'active', 'spinnerHeight'],
+  props: {
+    text: {
+      type: String,
+      default: ''
+    },
+    active: {
+      type: Boolean,
+      default: false
+    },
+    spinnerHeight: {
+      type: [Number, String],
+      default: 0
+    }
+  },
   computed: {
     wrapperClasses () {
       return [

@@ -121,24 +121,28 @@ export default {
       default: 'top'
     },
     title: {
-      type: [String, Number]
+      type: [String, Number],
+      default: ''
     },
     content: {
       type: [String, Number],
       default: ''
     },
     width: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     },
     confirm: {
       type: Boolean,
       default: false
     },
     okText: {
-      type: String
+      type: String,
+      default: null
     },
     cancelText: {
-      type: String
+      type: String,
+      default: null
     },
     transfer: {
       type: Boolean,
@@ -147,7 +151,8 @@ export default {
       }
     },
     popperClass: {
-      type: String
+      type: String,
+      default: ''
     },
     wordWrap: {
       type: Boolean,
@@ -155,7 +160,8 @@ export default {
     },
     // default by css: 8px 16px
     padding: {
-      type: String
+      type: String,
+      default: ''
     },
     // 3.4.0
     disabled: {
@@ -170,10 +176,11 @@ export default {
       }
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'on-cancel', 'on-ok'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -215,14 +222,14 @@ export default {
       return style
     },
     localeOkText () {
-      if (this.okText === undefined) {
+      if (this.okText == null) {
         return this.t('i.poptip.okText')
       } else {
         return this.okText
       }
     },
     localeCancelText () {
-      if (this.cancelText === undefined) {
+      if (this.cancelText == null) {
         return this.t('i.poptip.cancelText')
       } else {
         return this.cancelText

@@ -16,10 +16,20 @@ export default {
   name: 'Search',
   components: { iInput },
   props: {
-    prefixCls: String,
-    placeholder: String,
-    query: String
+    prefixCls: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    query: {
+      type: String,
+      default: ''
+    }
   },
+  emits: ['on-query-change', 'on-query-clear'],
   data () {
     return {
       currentQuery: this.query

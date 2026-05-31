@@ -76,13 +76,15 @@ export default {
       default: false
     },
     strokeColor: {
-      type: [String, Array]
+      type: [String, Array],
+      default: null
     },
     textInside: {
       type: Boolean,
       default: false
     }
   },
+  emits: ['on-status-change'],
   data () {
     return {
       currentStatus: this.status

@@ -25,18 +25,54 @@ function parseFlex (flex) {
 export default {
   name: 'Col',
   props: {
-    span: [Number, String],
-    order: [Number, String],
-    offset: [Number, String],
-    push: [Number, String],
-    pull: [Number, String],
-    className: String,
-    xs: [Number, Object],
-    sm: [Number, Object],
-    md: [Number, Object],
-    lg: [Number, Object],
-    xl: [Number, Object],
-    xxl: [Number, Object],
+    span: {
+      type: [Number, String],
+      default: 0
+    },
+    order: {
+      type: [Number, String],
+      default: 0
+    },
+    offset: {
+      type: [Number, String],
+      default: 0
+    },
+    push: {
+      type: [Number, String],
+      default: 0
+    },
+    pull: {
+      type: [Number, String],
+      default: 0
+    },
+    className: {
+      type: String,
+      default: ''
+    },
+    xs: {
+      type: [Number, Object],
+      default: () => ({})
+    },
+    sm: {
+      type: [Number, Object],
+      default: () => ({})
+    },
+    md: {
+      type: [Number, Object],
+      default: () => ({})
+    },
+    lg: {
+      type: [Number, Object],
+      default: () => ({})
+    },
+    xl: {
+      type: [Number, Object],
+      default: () => ({})
+    },
+    xxl: {
+      type: [Number, Object],
+      default: () => ({})
+    },
     // 4.5.0
     flex: {
       type: [Number, String],

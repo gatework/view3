@@ -140,19 +140,24 @@ export default {
       default: true
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     precision: {
-      type: Number
+      type: Number,
+      default: null
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     formatter: {
-      type: Function
+      type: Function,
+      default: null
     },
     parser: {
-      type: Function
+      type: Function,
+      default: null
     },
     placeholder: {
       type: String,
@@ -221,7 +226,7 @@ export default {
     precisionValue () {
       // can not display 1.0
       if (!this.currentValue) return this.currentValue
-      return this.precision ? this.currentValue.toFixed(this.precision) : this.currentValue
+      return this.precision != null ? this.currentValue.toFixed(this.precision) : this.currentValue
     },
     formatterValue () {
       if (this.formatter && this.precisionValue !== null) {
@@ -304,7 +309,7 @@ export default {
     },
     setValue (val) {
       // 如果 step 是小数，且没有设置 precision，是有问题的
-      if (val && !isNaN(this.precision)) val = Number(Number(val).toFixed(this.precision))
+      if (val && this.precision != null) val = Number(Number(val).toFixed(this.precision))
 
       const { min, max } = this
       if (val !== null) {

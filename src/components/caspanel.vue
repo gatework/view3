@@ -6,7 +6,7 @@
     >
       <Casitem
         v-for="item in data"
-        :key="getKey()"
+        :key="item.value"
         :prefix-cls="prefixCls"
         :data="item"
         :tmp-item="tmpItem"
@@ -28,8 +28,6 @@ import Casitem from './casitem.vue'
 import Emitter from '../mixins/emitter'
 import { findComponentUpward, findComponentDownward } from '../utils/assist'
 
-let key = 1
-
 export default {
   name: 'Caspanel',
   components: { Casitem },
@@ -43,8 +41,14 @@ export default {
     },
     disabled: Boolean,
     changeOnSelect: Boolean,
-    trigger: String,
-    prefixCls: String
+    trigger: {
+      type: String,
+      default: 'click'
+    },
+    prefixCls: {
+      type: String,
+      default: 'ivu-cascader'
+    }
   },
   data () {
     return {
@@ -175,9 +179,6 @@ export default {
       } else {
         findComponentUpward(this, 'Cascader').updateResult(result)
       }
-    },
-    getKey () {
-      return key++
     }
   }
 }

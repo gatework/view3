@@ -4,9 +4,18 @@ import { h } from 'vue'
 export default {
   name: 'TableExpand',
   props: {
-    row: Object,
-    render: Function,
-    index: Number,
+    row: {
+      type: Object,
+      default: () => ({})
+    },
+    render: {
+      type: Function,
+      default: null
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
     column: {
       type: Object,
       default: null

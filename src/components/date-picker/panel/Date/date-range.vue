@@ -9,6 +9,7 @@
     >
       <div
         v-for="shortcut in shortcuts"
+        :key="shortcut.text"
         :class="[prefixCls + '-shortcut']"
         @click="handleShortcutClick(shortcut)"
       >

@@ -47,8 +47,14 @@ export default {
   components: { iButton, Icon },
   inject: ['TransferInstance'],
   props: {
-    prefixCls: String,
-    operations: Array,
+    prefixCls: {
+      type: String,
+      default: 'ivu-transfer'
+    },
+    operations: {
+      type: Array,
+      default: () => []
+    },
     leftActive: Boolean,
     rightActive: Boolean,
     reverseOperation: Boolean

@@ -24,7 +24,8 @@ export default {
       required: true
     },
     label: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     },
     disabled: {
       type: Boolean,
@@ -40,7 +41,8 @@ export default {
     },
     // 4.0.0
     tag: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     }
   },
   emits: ['on-select-selected', 'on-clickoutside'],

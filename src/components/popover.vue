@@ -89,6 +89,7 @@ export default {
       required: false,
       default: null
     }
-  }
+  },
+  emits: ['on-cancel', 'on-ok']
 }
 </script>

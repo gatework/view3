@@ -1,9 +1,7 @@
 <template>
-  <transition
-    v-if="fade"
-    name="fade"
-  >
+  <transition name="fade">
     <div
+      v-if="fade"
       :class="classes"
       :style="wraperStyles"
       @click.stop="check"
@@ -27,7 +25,7 @@
     </div>
   </transition>
   <div
-    v-else
+    v-if="!fade"
     :class="classes"
     :style="wraperStyles"
     @click.stop="check"
@@ -79,11 +77,13 @@ export default {
     },
     type: {
       validator (value) {
-        return oneOf(value, ['border', 'dot'])
-      }
+        return value == null || oneOf(value, ['border', 'dot'])
+      },
+      default: null
     },
     name: {
-      type: [String, Number]
+      type: [String, Number],
+      default: ''
     },
     fade: {
       type: Boolean,
@@ -97,6 +97,7 @@ export default {
       default: 'default'
     }
   },
+  emits: ['on-close', 'on-change'],
   data () {
     return {
       isChecked: this.checked

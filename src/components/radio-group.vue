@@ -34,8 +34,9 @@ export default {
     },
     type: {
       validator (value) {
-        return oneOf(value, ['button'])
-      }
+        return value == null || oneOf(value, ['button'])
+      },
+      default: null
     },
     vertical: {
       type: Boolean,

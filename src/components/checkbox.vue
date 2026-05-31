@@ -57,7 +57,8 @@ export default {
       default: false
     },
     label: {
-      type: [String, Number, Boolean]
+      type: [String, Number, Boolean],
+      default: ''
     },
     indeterminate: {
       type: Boolean,
@@ -72,7 +73,8 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     // 4.0.0
     border: {

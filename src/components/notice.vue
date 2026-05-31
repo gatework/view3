@@ -70,7 +70,8 @@ export default {
       default: 1.5
     },
     type: {
-      type: String
+      type: String,
+      default: ''
     },
     content: {
       type: String,
@@ -78,7 +79,8 @@ export default {
     },
     withIcon: Boolean,
     render: {
-      type: Function
+      type: Function,
+      default: null
     },
     hasTitle: Boolean,
     styles: {
@@ -94,24 +96,28 @@ export default {
       default: false
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     name: {
       type: String,
       required: true
     },
     onClose: {
-      type: Function
+      type: Function,
+      default: () => {}
     },
     transitionName: {
-      type: String
+      type: String,
+      default: ''
     },
     background: {
       type: Boolean,
       default: false
     },
     msgType: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -140,7 +146,7 @@ export default {
     contentClasses () {
       return [
                     `${this.baseClass}-content`,
-                    this.render !== undefined ? `${this.baseClass}-content-with-render` : ''
+                    this.render != null ? `${this.baseClass}-content-with-render` : ''
       ]
     },
     messageContentClasses () {
@@ -161,7 +167,7 @@ export default {
     messageClasses () {
       return [
                     `${this.baseClass}-content`,
-                    this.render !== undefined ? `${this.baseClass}-content-with-render` : ''
+                    this.render != null ? `${this.baseClass}-content-with-render` : ''
       ]
     }
   },

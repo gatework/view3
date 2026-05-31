@@ -29,7 +29,8 @@ export default {
       default: 'light'
     },
     activeName: {
-      type: [String, Number]
+      type: [String, Number],
+      default: ''
     },
     openNames: {
       type: Array,

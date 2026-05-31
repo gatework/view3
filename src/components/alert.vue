@@ -55,6 +55,7 @@ export default {
       default: false
     }
   },
+  emits: ['on-close'],
   data () {
     return {
       closed: false,

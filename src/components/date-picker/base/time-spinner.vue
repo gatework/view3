@@ -8,6 +8,7 @@
         <li
           v-for="item in hoursList"
           v-show="!item.hide"
+          :key="`hours-${item.text}`"
           :class="getCellCls(item)"
           @click="handleClick('hours', item)"
         >
@@ -23,6 +24,7 @@
         <li
           v-for="item in minutesList"
           v-show="!item.hide"
+          :key="`minutes-${item.text}`"
           :class="getCellCls(item)"
           @click="handleClick('minutes', item)"
         >
@@ -39,6 +41,7 @@
         <li
           v-for="item in secondsList"
           v-show="!item.hide"
+          :key="`seconds-${item.text}`"
           :class="getCellCls(item)"
           @click="handleClick('seconds', item)"
         >
@@ -80,6 +83,7 @@ export default {
       default: () => []
     }
   },
+  emits: ['on-change', 'on-pick-click'],
   data () {
     return {
       spinerSteps: [1, 1, 1].map((one, i) => Math.abs(this.steps[i]) || one),

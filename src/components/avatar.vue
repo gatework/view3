@@ -46,16 +46,19 @@ export default {
       }
     },
     src: {
-      type: String
+      type: String,
+      default: ''
     },
     icon: {
-      type: String
+      type: String,
+      default: ''
     },
     customIcon: {
       type: String,
       default: ''
     }
   },
+  emits: ['on-error'],
   data () {
     return {
       prefixCls: prefixCls,

@@ -88,10 +88,12 @@ export default {
       default: 'dark'
     },
     maxWidth: {
-      type: [String, Number]
+      type: [String, Number],
+      default: null
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   emits: ['update:modelValue'],

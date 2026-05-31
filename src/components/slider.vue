@@ -29,6 +29,7 @@
       <template v-if="showStops">
         <div
           v-for="item in stops"
+          :key="item"
           :class="[prefixCls + '-stop']"
           :style="{ 'left': item + '%' }"
           @click.self="sliderClick"
@@ -178,7 +179,8 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     // 3.4.0
     activeChange: {
@@ -187,7 +189,8 @@ export default {
     },
     // 4.0.0
     marks: {
-      type: Object
+      type: Object,
+      default: () => ({})
     }
   },
   emits: ['update:modelValue', 'on-input', 'on-change'],
@@ -439,14 +442,13 @@ export default {
     handleDecimal (pos, step) {
       if (step < 1) {
         const sl = step.toString()
-        let multiple = 1
         let m
         try {
           m = sl.split('.')[1].length
         } catch (e) {
           m = 0
         }
-        multiple = Math.pow(10, m)
+        const multiple = Math.pow(10, m)
         return (pos * multiple) % (step * multiple) / multiple
       } else return pos % step
     },

@@ -105,11 +105,26 @@ export default {
   components: { Icon, Checkbox, TableExpand, TableSlot, Tooltip },
   inject: ['tableRoot'],
   props: {
-    prefixCls: String,
-    row: Object,
-    column: Object,
-    naturalIndex: Number, // index of rebuildData
-    index: Number, // _index of data
+    prefixCls: {
+      type: String,
+      default: 'ivu-table'
+    },
+    row: {
+      type: Object,
+      default: () => ({})
+    },
+    column: {
+      type: Object,
+      default: () => ({})
+    },
+    naturalIndex: {
+      type: Number,
+      default: 0
+    }, // index of rebuildData
+    index: {
+      type: Number,
+      default: 0
+    }, // _index of data
     checked: Boolean,
     disabled: Boolean,
     expanded: Boolean,

@@ -38,6 +38,8 @@ export default {
 
   mixins: [HSAMixin, Prefixes],
 
+  emits: ['change'],
+
   data () {
     const normalStep = 0.01
 

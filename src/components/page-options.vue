@@ -32,7 +32,7 @@
       {{ t('i.page.goto') }}
       <input
         type="text"
-        :value="_current"
+        :value="current"
         autocomplete="off"
         spellcheck="false"
         :disabled="disabled"
@@ -58,18 +58,33 @@ export default {
   components: { VSelect, VOption },
   mixins: [Locale],
   props: {
-    pageSizeOpts: Array,
+    pageSizeOpts: {
+      type: Array,
+      default: () => []
+    },
     showSizer: Boolean,
     showElevator: Boolean,
-    current: Number,
-    _current: Number,
-    pageSize: Number,
-    allPages: Number,
+    current: {
+      type: Number,
+      default: 1
+    },
+    pageSize: {
+      type: Number,
+      default: 10
+    },
+    allPages: {
+      type: Number,
+      default: 1
+    },
     isSmall: Boolean,
-    placement: String,
+    placement: {
+      type: String,
+      default: 'bottom'
+    },
     transfer: Boolean,
     disabled: Boolean
   },
+  emits: ['on-size', 'on-page'],
   data () {
     return {
       currentPageSize: this.pageSize

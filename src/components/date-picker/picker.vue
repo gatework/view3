@@ -134,7 +134,8 @@ export default {
   mixins: [Emitter, mixinsForm],
   props: {
     format: {
-      type: String
+      type: String,
+      default: ''
     },
     readonly: {
       type: Boolean,
@@ -177,7 +178,8 @@ export default {
       default: false
     },
     startDate: {
-      type: Date
+      type: Date,
+      default: null
     },
     size: {
       validator (value) {
@@ -204,17 +206,20 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     steps: {
       type: Array,
       default: () => []
     },
     modelValue: {
-      type: [Date, String, Array]
+      type: [Date, String, Array],
+      default: null
     },
     options: {
       type: Object,
@@ -232,10 +237,11 @@ export default {
       }
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
-  emits: ['update:modelValue', 'on-open-change', 'on-change', 'on-ok', 'on-clickoutside'],
+  emits: ['update:modelValue', 'on-open-change', 'on-change', 'on-ok', 'on-clickoutside', 'on-clear'],
   data () {
     const isRange = this.type.includes('range')
     const emptyArray = isRange ? [null, null] : [null]
@@ -300,13 +306,7 @@ export default {
     },
     // 3.4.0, global setting customArrow 有值时，arrow 赋值空
     arrowType () {
-      let type = ''
-
-      if (this.type === 'time' || this.type === 'timerange') {
-        type = 'ios-time-outline'
-      } else {
-        type = 'ios-calendar-outline'
-      }
+      let type = (this.type === 'time' || this.type === 'timerange') ? 'ios-time-outline' : 'ios-calendar-outline'
 
       if (this.showClose) type = 'ios-close-circle'
 

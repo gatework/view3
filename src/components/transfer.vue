@@ -90,7 +90,8 @@ export default {
       }
     },
     titles: {
-      type: Array
+      type: Array,
+      default: null
     },
     operations: {
       type: Array,
@@ -103,7 +104,8 @@ export default {
       default: false
     },
     filterPlaceholder: {
-      type: String
+      type: String,
+      default: null
     },
     filterMethod: {
       type: Function,
@@ -113,7 +115,8 @@ export default {
       }
     },
     notFoundText: {
-      type: String
+      type: String,
+      default: null
     },
     // 4.2.0
     // 反转两个按钮
@@ -145,21 +148,21 @@ export default {
       return this.getValidKeys('right').length
     },
     localeFilterPlaceholder () {
-      if (this.filterPlaceholder === undefined) {
+      if (this.filterPlaceholder == null) {
         return this.t('i.transfer.filterPlaceholder')
       } else {
         return this.filterPlaceholder
       }
     },
     localeNotFoundText () {
-      if (this.notFoundText === undefined) {
+      if (this.notFoundText == null) {
         return this.t('i.transfer.notFoundText')
       } else {
         return this.notFoundText
       }
     },
     localeTitles () {
-      if (this.titles === undefined) {
+      if (this.titles == null) {
         return [this.t('i.transfer.titles.source'), this.t('i.transfer.titles.target')]
       } else {
         return this.titles

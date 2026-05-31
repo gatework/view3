@@ -8,6 +8,7 @@
     <colgroup>
       <col
         v-for="column in columns"
+        :key="column._index ?? column.key"
         :width="setCellWidth(column)"
       >
       <col
@@ -16,9 +17,13 @@
       >
     </colgroup>
     <thead>
-      <tr v-for="(cols, rowIndex) in headRows">
+      <tr
+        v-for="(cols, rowIndex) in headRows"
+        :key="rowIndex"
+      >
         <th
           v-for="(column, index) in cols"
+          :key="column._index ?? `${rowIndex}-${index}`"
           :colspan="column.colSpan"
           :rowspan="column.rowSpan"
           :class="alignCls(column)"
@@ -99,8 +104,8 @@
                         @update:model-value="getColumn(rowIndex, index)._filterChecked = $event"
                       >
                         <Checkbox
-                          v-for="(item, index) in column.filters"
-                          :key="index"
+                          v-for="(item, filterIndex) in column.filters"
+                          :key="filterIndex"
                           :label="item.value"
                         >
                           {{ item.label }}
@@ -142,6 +147,7 @@
                       </li>
                       <li
                         v-for="item in column.filters"
+                        :key="item.value"
                         :class="itemClasses(getColumn(rowIndex, index), item)"
                         @click="handleSelect(getColumn(rowIndex, index)._index, item.value)"
                       >
@@ -185,18 +191,42 @@ export default {
   components: { CheckboxGroup, Checkbox, Poptip, VButton, renderHeader },
   mixins: [Mixin, Locale],
   props: {
-    prefixCls: String,
-    styleObject: Object,
-    columns: Array,
-    objData: Object,
-    data: Array, // rebuildData
-    columnsWidth: Object,
+    prefixCls: {
+      type: String,
+      default: 'ivu-table'
+    },
+    styleObject: {
+      type: Object,
+      default: () => ({})
+    },
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    objData: {
+      type: Object,
+      default: () => ({})
+    },
+    data: {
+      type: Array,
+      default: () => []
+    }, // rebuildData
+    columnsWidth: {
+      type: Object,
+      default: () => ({})
+    },
     fixed: {
       type: [Boolean, String],
       default: false
     },
-    columnRows: Array,
-    fixedColumnRows: Array
+    columnRows: {
+      type: Array,
+      default: () => []
+    },
+    fixedColumnRows: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {
@@ -209,7 +239,7 @@ export default {
     styles () {
       const style = Object.assign({}, this.styleObject)
       const width = parseInt(this.styleObject.width)
-      style.width = `${width}px`
+      if (!Number.isNaN(width)) style.width = `${width}px`
       return style
     },
     isSelectAll () {

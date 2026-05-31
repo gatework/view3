@@ -173,10 +173,8 @@ export default {
       else return Math.max(value1, value2)
     },
     getAnotherOffset (value) {
-      let res = 0
-      if (this.valueIsPx) res = `${this.$refs.outerWrapper[this.offsetSize] - parseFloat(value)}px`
-      else res = 1 - value
-      return res
+      if (this.valueIsPx) return `${this.$refs.outerWrapper[this.offsetSize] - parseFloat(value)}px`
+      return 1 - value
     },
     handleMove (e) {
       const pageOffset = this.isHorizontal ? e.pageX : e.pageY

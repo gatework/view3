@@ -80,7 +80,8 @@ export default {
       default: false
     },
     placeholder: {
-      type: String
+      type: String,
+      default: ''
     },
     size: {
       validator (value) {
@@ -91,7 +92,8 @@ export default {
       }
     },
     icon: {
-      type: String
+      type: String,
+      default: ''
     },
     filterMethod: {
       type: [Function, Boolean],
@@ -116,16 +118,19 @@ export default {
       }
     },
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     elementId: {
-      type: String
+      type: String,
+      default: ''
     },
     transferClassName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
-  emits: ['on-search', 'update:modelValue', 'on-focus', 'on-blur', 'on-change', 'on-select'],
+  emits: ['on-search', 'update:modelValue', 'on-focus', 'on-blur', 'on-change', 'on-select', 'on-clear'],
   data () {
     return {
       currentValue: this.modelValue,

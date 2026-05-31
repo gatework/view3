@@ -52,6 +52,7 @@ export default {
       default: undefined
     }
   },
+  emits: ['picker-color', 'change'],
 
   data () {
     const columns = 12

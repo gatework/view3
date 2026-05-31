@@ -4,8 +4,14 @@ import { h, inject } from 'vue'
 export default {
   name: 'TableSlot',
   props: {
-    row: Object,
-    index: Number,
+    row: {
+      type: Object,
+      default: () => ({})
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
     column: {
       type: Object,
       default: null

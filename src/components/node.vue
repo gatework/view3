@@ -46,16 +46,17 @@
           />
           <template v-else>{{ data.title }}</template>
         </span>
-        <Tree-node
-          v-for="(item, i) in children"
-          v-if="data.expand"
-          :key="i"
-          :appear="appearByClickArrow"
-          :data="item"
-          :multiple="multiple"
-          :show-checkbox="showCheckbox"
-          :children-key="childrenKey"
-        />
+        <template v-if="data.expand">
+          <Tree-node
+            v-for="(item, i) in children"
+            :key="i"
+            :appear="appearByClickArrow"
+            :data="item"
+            :multiple="multiple"
+            :show-checkbox="showCheckbox"
+            :children-key="childrenKey"
+          />
+        </template>
       </li>
     </ul>
   </collapse-transition>

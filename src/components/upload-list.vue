@@ -2,6 +2,7 @@
   <ul :class="[prefixCls + '-list']">
     <li
       v-for="file in files"
+      :key="file.uid ?? file.name"
       :class="fileCls(file)"
       @click="handleClick(file)"
     >
@@ -41,6 +42,7 @@ export default {
       }
     }
   },
+  emits: ['on-file-click', 'on-file-preview', 'on-file-remove'],
   data () {
     return {
       prefixCls: prefixCls

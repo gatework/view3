@@ -54,13 +54,15 @@ export default {
       default: 0
     },
     offsetBottom: {
-      type: Number
+      type: Number,
+      default: null
     },
     useCapture: {
       type: Boolean,
       default: false
     }
   },
+  emits: ['on-change'],
   data () {
     return {
       affix: false,
@@ -72,7 +74,7 @@ export default {
   computed: {
     offsetType () {
       let type = 'top'
-      if (this.offsetBottom >= 0) {
+      if (this.offsetBottom != null && this.offsetBottom >= 0) {
         type = 'bottom'
       }
 

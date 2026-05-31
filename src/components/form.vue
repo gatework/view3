@@ -30,13 +30,16 @@ export default {
   },
   props: {
     model: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     rules: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     labelWidth: {
-      type: Number
+      type: Number,
+      default: null
     },
     labelPosition: {
       validator (value) {

@@ -117,17 +117,20 @@ export default {
       }
     },
     title: {
-      type: String
+      type: String,
+      default: ''
     },
     width: {
       type: [Number, String],
       default: 520
     },
     okText: {
-      type: String
+      type: String,
+      default: null
     },
     cancelText: {
-      type: String
+      type: String,
+      default: null
     },
     loading: {
       type: Boolean,
@@ -140,7 +143,8 @@ export default {
       }
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     // for instance
     footerHide: {
@@ -277,14 +281,14 @@ export default {
       return style
     },
     localeOkText () {
-      if (this.okText === undefined) {
+      if (this.okText == null) {
         return this.t('i.modal.okText')
       } else {
         return this.okText
       }
     },
     localeCancelText () {
-      if (this.cancelText === undefined) {
+      if (this.cancelText == null) {
         return this.t('i.modal.cancelText')
       } else {
         return this.cancelText

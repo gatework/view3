@@ -61,30 +61,36 @@ export default {
       default: ''
     },
     labelWidth: {
-      type: Number
+      type: Number,
+      default: null
     },
     prop: {
-      type: String
+      type: String,
+      default: ''
     },
     required: {
       type: Boolean,
       default: false
     },
     rules: {
-      type: [Object, Array]
+      type: [Object, Array],
+      default: null
     },
     error: {
-      type: String
+      type: String,
+      default: ''
     },
     validateStatus: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     showMessage: {
       type: Boolean,
       default: true
     },
     labelFor: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data () {

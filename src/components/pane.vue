@@ -15,14 +15,16 @@ export default {
   inject: ['TabsInstance'],
   props: {
     name: {
-      type: String
+      type: String,
+      default: ''
     },
     label: {
       type: [String, Function],
       default: ''
     },
     icon: {
-      type: String
+      type: String,
+      default: ''
     },
     disabled: {
       type: Boolean,
@@ -34,12 +36,14 @@ export default {
     },
     // Tabs 嵌套时，用 tab 区分层级，指向对应的 Tabs 的 name
     tab: {
-      type: String
+      type: String,
+      default: ''
     },
     // 在 TabPane 使用 v-if 时，并不会按照预先的顺序渲染，这时可设置 index，并从小到大排序
     // 数值需大于 0
     index: {
-      type: Number
+      type: Number,
+      default: null
     },
     // 4.3.0
     contextMenu: {
