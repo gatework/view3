@@ -102,6 +102,9 @@ export default {
   mounted () {
     this.init()
   },
+  beforeUnmount () {
+    this.removeListener()
+  },
   methods: {
     handleAffixStateChange (state) {
       this.isAffixed = this.affix && state
@@ -206,9 +209,6 @@ export default {
         on(window, 'hashchange', this.handleHashChange)
       })
     }
-  },
-  beforeUnmount () {
-    this.removeListener()
   }
 }
 </script>

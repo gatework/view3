@@ -703,6 +703,13 @@ export default {
       }
     })
   },
+  beforeUnmount () {
+    this.mitt.off('on-visible-change')
+    off(window, 'resize', this.handleResize)
+    this.observer.removeAllListeners(this.$el)
+    this.observer.uninstall(this.$el)
+    this.observer = null
+  },
   methods: {
     rowClsName (index) {
       return this.rowClassName(this.data[index], index)
@@ -1538,13 +1545,6 @@ export default {
     handleClickContextMenuOutside () {
       this.contextMenuVisible = false
     }
-  },
-  beforeUnmount () {
-    this.mitt.off('on-visible-change')
-    off(window, 'resize', this.handleResize)
-    this.observer.removeAllListeners(this.$el)
-    this.observer.uninstall(this.$el)
-    this.observer = null
   }
 }
 </script>

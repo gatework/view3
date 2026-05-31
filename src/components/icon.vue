@@ -10,7 +10,6 @@ const prefixCls = 'ion'
 
 export default {
   name: 'Icon',
-  emits: ['click'],
   props: {
     type: {
       type: String,
@@ -30,6 +29,7 @@ export default {
       default: ''
     }
   },
+  emits: ['click'],
   computed: {
     classes () {
       return [

@@ -259,6 +259,13 @@ export default {
       })
     }
   },
+  beforeUnmount () {
+    const childElement = this.getInputChildren()
+    if (childElement) {
+      childElement.removeEventListener('focus', this.handleFocus, false)
+      childElement.removeEventListener('blur', this.handleBlur, false)
+    }
+  },
   methods: {
     handleClick () {
       if (this.disabled) return
@@ -352,13 +359,6 @@ export default {
     },
     handleIndexIncrease () {
       this.tIndex = this.handleGetIndex()
-    }
-  },
-  beforeUnmount () {
-    const childElement = this.getInputChildren()
-    if (childElement) {
-      childElement.removeEventListener('focus', this.handleFocus, false)
-      childElement.removeEventListener('blur', this.handleBlur, false)
     }
   }
 }

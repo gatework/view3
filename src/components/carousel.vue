@@ -59,6 +59,11 @@ const prefixCls = 'ivu-carousel'
 export default {
   name: 'Carousel',
   components: { Icon },
+  provide () {
+    return {
+      CarouselInstance: this
+    }
+  },
   props: {
     arrow: {
       type: String,
@@ -113,6 +118,7 @@ export default {
       }
     }
   },
+  emits: ['update:modelValue', 'on-change', 'on-click'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -169,12 +175,6 @@ export default {
       ]
     }
   },
-  emits: ['update:modelValue', 'on-change', 'on-click'],
-  provide () {
-    return {
-      CarouselInstance: this
-    }
-  },
   watch: {
     autoplay () {
       this.setAutoplay()
@@ -204,6 +204,11 @@ export default {
     this.setAutoplay()
     //            window.addEventListener('resize', this.handleResize, false);
     on(window, 'resize', this.handleResize)
+  },
+  beforeUnmount () {
+    //            window.removeEventListener('resize', this.handleResize, false);
+    off(window, 'resize', this.handleResize)
+    window.clearInterval(this.timer)
   },
   methods: {
     // find option component
@@ -346,11 +351,6 @@ export default {
     handleClick (type) {
       this.$emit('on-click', this[type])
     }
-  },
-  beforeUnmount () {
-    //            window.removeEventListener('resize', this.handleResize, false);
-    off(window, 'resize', this.handleResize)
-    window.clearInterval(this.timer)
   }
 }
 </script>

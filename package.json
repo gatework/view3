@@ -1,4 +1,43 @@
 {
+  "name": "view3",
+  "version": "1.0.0",
+  "description": "A Vue 3 component library built with Vite.",
+  "license": "MIT",
+  "author": "WENWU YAN <webank@139.com>",
+  "homepage": "https://github.com/gatework/view3#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gatework/view3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gatework/view3/issues"
+  },
+  "packageManager": "yarn@1.22.22",
+  "main": "dist/view3.mjs",
+  "module": "dist/view3.mjs",
+  "files": [
+    "dist",
+    "src",
+    "package.json"
+  ],
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "serve": "yarn dev",
+    "build:dev": "vite build --mode development",
+    "build:prod": "vite build",
+    "build:lib": "vite build --config vite.lib.config.mjs",
+    "build": "yarn build:prod && yarn build:lib",
+    "lint": "yarn lint:js && yarn lint:style",
+    "lint:js": "eslint \"src/**/*.{js,vue}\" \"examples/**/*.{js,vue}\"",
+    "lint:js:fix": "yarn lint:js --fix",
+    "lint:style": "stylelint \"src/**/*.{scss,css}\" --allow-empty-input",
+    "lint:style:fix": "yarn lint:style --fix",
+    "format": "yarn lint:js:fix && yarn lint:style:fix",
+    "ci": "yarn lint && yarn build"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.35"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "async-validator": "^4.2.5",
@@ -9,18 +48,6 @@
     "mitt": "^3.0.1",
     "normalize.css": "^8.0.1",
     "tinycolor2": "^1.6.0"
-  },
-  "name": "view3",
-  "version": "1.0.0",
-  "main": "dist/view3.mjs",
-  "module": "dist/view3.mjs",
-  "files": [
-    "dist",
-    "src",
-    "package.json"
-  ],
-  "peerDependencies": {
-    "vue": "^3.5.35"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -40,16 +67,5 @@
     "vue": "^3.5.35",
     "vue-eslint-parser": "^10.4.0",
     "vue-router": "^5.1.0"
-  },
-  "scripts": {
-    "serve": "vite --host 127.0.0.1",
-    "build:dev": "vite build --mode development",
-    "build:prod": "vite build",
-    "build:lib": "vite build --config vite.lib.config.mjs",
-    "eslint": "eslint \"src/**/*.{js,vue}\" \"examples/**/*.{js,vue}\" --fix",
-    "stylelint": "stylelint \"src/**/*.{scss,css}\" --fix"
-  },
-  "author": "",
-  "license": "MIT",
-  "description": ""
+  }
 }

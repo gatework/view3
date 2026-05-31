@@ -102,6 +102,7 @@ export default {
       default: ''
     }
   },
+  emits: ['update:modelValue', 'on-change'],
   data () {
     return {
       prefixCls: prefixCls,
@@ -111,7 +112,6 @@ export default {
       currentValue: this.modelValue
     }
   },
-  emits: ['update:modelValue', 'on-change'],
   computed: {
     classes () {
       return [

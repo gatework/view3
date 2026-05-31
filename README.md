@@ -59,17 +59,41 @@ dist/view3.mjs
 
 ## 代码检查
 
-检查 JavaScript / Vue：
+执行完整静态检查：
 
 ```bash
-./node_modules/.bin/eslint "src/**/*.{js,vue}" "examples/**/*.{js,vue}" --no-fix --quiet
+yarn lint
 ```
 
-检查 Sass / CSS：
+自动修复格式和可安全修复的问题：
 
 ```bash
-./node_modules/.bin/stylelint "src/**/*.{scss,css}" --allow-empty-input --formatter compact
+yarn format
 ```
+
+本地复现 CI 质量门禁：
+
+```bash
+yarn ci
+```
+
+## 流水线
+
+项目提供了可复用的 GitHub Actions 作业流：
+
+```text
+.github/workflows/reusable-node-pipeline.yml
+```
+
+仓库默认入口：
+
+```text
+.github/workflows/ci.yml
+```
+
+默认流水线会执行依赖安装、`yarn lint`、`yarn build`。其他前端项目可通过 `workflow_call` 复用同一作业流，并通过 `node-version`、`install-command`、`lint-command`、`build-command` 覆盖具体命令。
+
+当前质量门禁以 lint error 和构建失败为阻断条件；lint warning 属于存量治理项，应在后续组件重构中逐步收敛为零。
 
 ## 在 Vue 3 项目中使用
 
@@ -132,14 +156,17 @@ Rails 样式入口应使用 Sass module 写法，不再使用 `@import`：
 
 ## 发布到 GitHub
 
-首次发布到新仓库时：
+当前上游仓库：
 
-```bash
-git remote add gatework git@github.com:gatework/view3.git
-git push -u gatework master
+```text
+git@github.com:gatework/view3.git
 ```
 
-如果仓库尚未创建，需要先通过 GitHub API、GitHub CLI 或网页创建 `gatework/view3`。
+提交后推送：
+
+```bash
+git push
+```
 
 ## 当前维护约定
 

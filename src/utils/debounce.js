@@ -12,9 +12,12 @@
  * @param {Boolean} whether to execute at the beginning (`false`)
  * @api public
  */
-function debounce (func, wait, immediate) {
-  let timeout, args, context, timestamp, result
-  if (wait == null) wait = 100
+function debounce (func, wait = 100, immediate = false) {
+  let timeout = null
+  let args
+  let context
+  let timestamp = 0
+  let result
 
   function later () {
     const last = Date.now() - timestamp
@@ -28,13 +31,14 @@ function debounce (func, wait, immediate) {
         context = args = null
       }
     }
-  };
+  }
 
-  const debounced = function () {
+  const debounced = function (...nextArgs) {
     context = this
-    args = arguments
+    args = nextArgs
     timestamp = Date.now()
     const callNow = immediate && !timeout
+
     if (!timeout) timeout = setTimeout(later, wait)
     if (callNow) {
       result = func.apply(context, args)
@@ -52,19 +56,18 @@ function debounce (func, wait, immediate) {
   }
 
   debounced.flush = function () {
-    if (timeout) {
-      result = func.apply(context, args)
-      context = args = null
+    if (!timeout) return result
 
-      clearTimeout(timeout)
-      timeout = null
-    }
+    result = func.apply(context, args)
+    context = args = null
+
+    clearTimeout(timeout)
+    timeout = null
+
+    return result
   }
 
   return debounced
-};
-
-// Adds compatibility for ES modules
-debounce.debounce = debounce
+}
 
 export default debounce

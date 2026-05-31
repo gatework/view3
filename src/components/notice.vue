@@ -180,6 +180,9 @@ export default {
       this.withDesc = this.render ? true : (desc ? desc.innerHTML !== '' : false)
     }
   },
+  beforeUnmount () {
+    this.clearCloseTimer()
+  },
   methods: {
     clearCloseTimer () {
       if (this.closeTimer) {
@@ -207,9 +210,6 @@ export default {
         }
       }
     }
-  },
-  beforeUnmount () {
-    this.clearCloseTimer()
   }
 }
 </script>

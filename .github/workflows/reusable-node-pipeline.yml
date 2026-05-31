@@ -1,0 +1,53 @@
+name: Reusable Node Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Node.js version used by the frontend toolchain.
+        required: false
+        type: string
+        default: '20'
+      install-command:
+        description: Dependency install command.
+        required: false
+        type: string
+        default: yarn install --frozen-lockfile
+      lint-command:
+        description: Static analysis command.
+        required: false
+        type: string
+        default: yarn lint
+      build-command:
+        description: Production build command.
+        required: false
+        type: string
+        default: yarn build
+
+jobs:
+  frontend:
+    name: Frontend Quality Gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: yarn
+
+      # Keep the pipeline command-driven so other projects can reuse this file
+      # without inheriting view3-specific assumptions beyond Node and Yarn.
+      - name: Install Dependencies
+        run: ${{ inputs.install-command }}
+
+      - name: Lint
+        run: ${{ inputs.lint-command }}
+
+      - name: Build
+        run: ${{ inputs.build-command }}

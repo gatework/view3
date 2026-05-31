@@ -270,7 +270,8 @@ export function findBrothersComponents (context, componentName, exceptMe = true)
   }).filter(Boolean)
 
   if (exceptMe) {
-    const index = res.findIndex(item => item._uid === context._uid)
+    const currentInstance = context?.$
+    const index = res.findIndex(item => item === context || item?.$ === currentInstance)
 
     if (index >= 0) res.splice(index, 1)
   }

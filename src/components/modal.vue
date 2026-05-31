@@ -357,6 +357,10 @@ export default {
     // ESC close
     document.addEventListener('keydown', this.EscClose)
   },
+  beforeUnmount () {
+    document.removeEventListener('keydown', this.EscClose)
+    this.removeScrollEffect()
+  },
   methods: {
     close () {
       this.visible = false
@@ -460,10 +464,6 @@ export default {
         this.modalIndex = this.handleGetModalIndex()
       }
     }
-  },
-  beforeUnmount () {
-    document.removeEventListener('keydown', this.EscClose)
-    this.removeScrollEffect()
   }
 }
 </script>
