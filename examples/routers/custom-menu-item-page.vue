@@ -4,7 +4,7 @@
       <span>{{ parentItem.name }}</span>
     </template>
     <template v-for="item in children">
-      <custem-menu-item
+      <custom-menu-item
         v-if="item.children && item.children.length !== 0"
         :key="`menu-${item.name}`"
         :parent-item="item"
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-  name: 'CustemMenuItem',
+  name: 'CustomMenuItem',
   props: {
     parentItem: {
       type: Object,

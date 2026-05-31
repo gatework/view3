@@ -27,6 +27,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "serve": "yarn dev",
+    "test": "node tests/utils/date.test.mjs",
     "build:dev": "vite build --mode development",
     "build:prod": "vite build",
     "build:lib": "vite build --config vite.lib.config.mjs",
