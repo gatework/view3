@@ -13,6 +13,10 @@
     "url": "https://github.com/gatework/view3/issues"
   },
   "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "^22.18.0 || >=24.11.0",
+    "yarn": ">=1.22.22 <2"
+  },
   "main": "dist/view3.mjs",
   "module": "dist/view3.mjs",
   "files": [

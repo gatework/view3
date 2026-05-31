@@ -7,7 +7,7 @@ on:
         description: Node.js version used by the frontend toolchain.
         required: false
         type: string
-        default: '20'
+        default: '22.18.0'
       install-command:
         description: Dependency install command.
         required: false

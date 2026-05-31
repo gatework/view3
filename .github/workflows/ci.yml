@@ -16,4 +16,4 @@ jobs:
   frontend:
     uses: ./.github/workflows/reusable-node-pipeline.yml
     with:
-      node-version: '20'
+      node-version: '22.18.0'
